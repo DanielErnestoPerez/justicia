@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Awesome</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css' integrity='sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==' crossorigin='anonymous' referrerpolicy='no-referrer'/>
+        <link rel="shortcut icon" href="https://img.icons8.com/ios-glyphs/60/fire-heart.png" type="image/x-icon">
+    </head>
+<body>
+    <div class="contenedor">
+    <header>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="#">Justicia Restaurativa <br>Cuba</a>
+        </div>
+
+        <!-- Menú principal -->
+        <input type="checkbox" class="menu-bar" name="" id="menu-bar" hidden="true">
+        <label for="menu-bar" class="fa fa-bars"></label>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Inicio</a>
+                    <a href="#">Acerca De</a>
+                    <a href="#">Contenido</a>
+                    <a href="#">Extra</a>
+                    <a href="#">Redes Sociales</a>
+                </li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <main>
+        <div class="banner">
+            {% block content %}
+
+            {% endblock  %}
+        </div>
+    </main>
+    
+    <footer>
+        <div>
+            <a href="#">Politica de privacidad</a>
+            <a href="#">Avisos legales</a>
+            <a href="#">Cookies</a>
+        </div>
+        <div>
+            <i class="fa-regular fa-copyright"></i>   Gestion de pedidos 2024
+        </div>
+    </footer>
+    </div>
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
