@@ -21,13 +21,27 @@
         <!-- Menú principal -->
         <input type="checkbox" class="menu-bar" name="" id="menu-bar" hidden="true">
         <label for="menu-bar" class="fa fa-bars"></label>
+        
+        
         <nav class="navbar">
             <ul>
-                <li><a href="#">Inicio</a>
-                    <a href="#">Acerca De</a>
-                    <a href="#">Contenido</a>
-                    <a href="#">Extra</a>
-                    <a href="#">Redes Sociales</a>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'publicaciones' %}">Publicaciones</a></li>
+                <li><a href="#">Redes Sociales</a></li>
+                <li>
+                    <div class="crear_publicacion_menu">
+                        <img src="{% static './img/usuario_foto.jpg' %}" alt="">
+                        <p>Crear Publicacion</p>
+                        <input type="checkbox" name="" id="menu-bart" hidden="true">
+                        <label for="menu-bart" class="fa-solid fa-angle-down"></label>
+
+                        <!-- Submenu -->
+                        <div class="crear_publicacion_menu_interno">
+                            <a href="#">My Profile</a>
+                            <a href="#">Edit Profile</a>
+                            <a href="#">Log out</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>
