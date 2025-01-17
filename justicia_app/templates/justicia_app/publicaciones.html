@@ -1,7 +1,26 @@
 {% extends './base.html' %}
 {% load static %}
 {% block content %}
-    {% for post in posts  %}
-        <img src="{{post.imagen.url}}" alt="">
-    {% endfor %}
+<div class="publicaciones_general">
+    <div class="container">
+        <div class="row">
+            {% for post in posts  %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="publicaciones_titulo">
+                            {{post.titulo}}
+                            usuario
+                        </div>
+                        <a href="#"><img class="card-img-top" src="{{post.imagen.url}}" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">{{post.titulo}}</h4>
+                            <p class="card-text">{{post.contenido}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+</div>
 {% endblock  %}
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, numquam? Adipisci architecto harum illo quaerat consectetur, sapiente atque ut tempora nesciunt nihil, eligendi soluta consequatur, molestiae consequuntur. Beatae, error deleniti.
