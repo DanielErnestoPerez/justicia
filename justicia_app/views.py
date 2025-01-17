@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def home(request):
     return render(request, 'justicia_app/home.html')
+
+def publicaciones(request):
+    return render(request, 'justicia_app/publicaciones.html')
