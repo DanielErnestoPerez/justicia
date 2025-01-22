@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'admin_honeypot',
     'justicia_app',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
