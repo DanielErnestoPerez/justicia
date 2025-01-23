@@ -33,7 +33,7 @@
                         <div class="editar_publicacion">
                             <a href="#"><i class="fa-solid fa-heart"></i></a>
                             <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </div>
                     <p class="card-text">{{post.resumen}}</p>

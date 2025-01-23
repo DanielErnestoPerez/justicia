@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load static %}
+{% block content %}
+        <div class="delete_post">
+            <div>   
+                <article>
+                    <img src="{{post.imagen_fondo.url}}" alt="">
+                    <img src="{{post.imagen_portada.url}}" alt="">
+                </article>
+            </div>
+            <div class="delete_post_menu">
+                <h2>Delete</h2>
+                <p>Are you sure you want to delete this post?</p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete" class='confirm_button'>
+                    <a href="{{ request.GET.next|default:'/publicaciones' }}" class='cancel_button'>Cancel</a>
+                </form>
+            </div>
+        </div>
+{% endblock %}

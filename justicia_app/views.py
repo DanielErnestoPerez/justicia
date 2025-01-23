@@ -25,7 +25,15 @@ def create_post(request):
         if create_post.is_valid():
             messages.success(request, 'Post created successfully!')
             create_post.save()
-            return redirect('home')
+            return redirect('publicaciones')
     else:
         create_post = CreatePost()
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
+
+def delete_post(request, post_id):
+    post_to_delete = Post.objects.get(id=post_id)
+    if request.method == 'POST':
+        messages.success(request, 'Post deleted successfully!')
+        post_to_delete.delete()
+        return redirect('publicaciones')
+    return render(request, 'justicia_app/delete_post.html', {'post': post_to_delete})
