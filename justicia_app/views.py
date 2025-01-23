@@ -28,4 +28,4 @@ def create_post(request):
             return redirect('home')
     else:
         create_post = CreatePost()
-    return render(request, 'awesome_app/create_post.html', {'create_post': create_post})
+    return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
