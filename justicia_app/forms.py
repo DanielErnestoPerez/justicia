@@ -8,6 +8,12 @@ class CreatePost(forms.ModelForm):
             'tags': 'Category',
         }
         widgets = {
+            'titulo': forms.Textarea(attrs={
+                'rows': 2,
+                'cols': 45,
+                'placeholder': 'Escribe un título aquí...',
+                'class': 'custom_placeholder',
+            }),
             'resumen': forms.Textarea(attrs={
                 'rows': 3,
                 'cols': 45,
