@@ -48,21 +48,23 @@ header{
     background: linear-gradient(90deg, brown, black);
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 header a{
     color: white;
 }
-/*-------------  logo ------------*/
+/*-------------  Logo ------------*/
 .logo{
     font-size: 2rem;
 }
 .logo span{
     font-size: 3rem;
 }
-/*-------------  navbar -------------*/
+/*-------------  Navbar -------------*/
 .navbar ul{
+    display: flex;
     list-style: none;
+    align-items: center;
 }
 .navbar ul li a{
     display: inline-block;
@@ -80,6 +82,57 @@ header a{
 }
 .fa-bars{
     visibility: hidden;
+}
+
+
+.fa-angle-down{
+    font-size: 2rem;
+}
+
+input:checked ~.fa-angle-down::before{
+    content: '\f00d';
+}
+.crear_publicacion_menu_interno{
+    position: absolute;
+    top: 8.5rem;
+    right: 15px;
+    width: fit-content;
+    transition: 0.3s ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 1;
+}
+.crear_publicacion_menu input[type=checkbox]:checked~.crear_publicacion_menu_interno{
+    transform: scaleY(1);
+}
+.crear_publicacion_menu_interno a{
+    display: block;
+    text-align: right;
+    padding: 0 .5rem;
+}
+
+
+
+
+/*-------------  Crear Publicacion Menu -------------*/
+.crear_publicacion_menu{
+    display: flex;
+    margin: 1rem;
+    align-items: center;
+}
+.crear_publicacion_menu img{
+    width: 4rem;
+    border-radius: 30px;
+}
+.crear_publicacion_menu p{
+    margin: 1rem;
+}
+.crear_publicacion_menu_interno ul{
+    display: block;
+}
+.crear_publicacion_menu_interno a{
+    font-size: 1.3rem !important;
+    margin: .3rem 0;
 }
 
 
@@ -104,8 +157,217 @@ header a{
     font-size: 1.4rem;
 }
 
+/*-------------  Publicaciones -------------*/
+.card{
+    margin-top: 1rem !important;
+    padding: 1rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, brown, black);
+    color: white;
+}
+
+article{
+    margin: auto;
+    position: relative;
+    width: 250px;
+    transition: all .3s ease;
+}
+article img:first-child{
+    box-shadow: 0 60px 60px -60px rgba(0, 30, 255, .5);
+    border-radius: 4px;
+    object-fit: cover;
+    width: 100%;
+    height: 150px;
+    margin: 2rem 0;
+}
+article img:last-child{
+    position: absolute;
+    width: 250px;
+    min-height: 200px;
+    max-height: 300px;
+    object-fit: contain;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    transform: translateX(25%);
+    transition: .3s ease;
+    opacity: 0;
+}
+article:hover{
+    transform: 
+        perspective(250px) 
+        rotateX(10deg)
+        translateY(-5%)
+        translateZ(0);
+}
+article:before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(
+        to bottom, transparent 10%,
+        rgba(0, 0, 0, .5) 50%,
+        rgba(0, 0, 0) 95%
+    );
+    opacity: 0;
+    transition: all .3s ease;
+}
+article:hover:before{
+    opacity: 1;
+}
+article:hover img:last-child{
+    opacity: 1;
+    transform: translateY(10%);
+}
+
+.publicaciones_titulo{
+    display: flex;
+    justify-content: space-between;
+}
 
 
+.tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding: 0 0 1rem 1rem;
+}
+.tag{
+    padding: 0 1rem;
+    background: black;
+    border-radius: 10px;
+    transition: .2s linear;
+    color: white;
+}
+.tag:hover, .interacciones a:hover{
+    background: linear-gradient(90deg, red, blue);
+    transform: scale(1.1);
+}
+
+.sub-menu{
+    display: flex;
+    gap: 5rem;
+}
+
+
+
+
+
+
+/*--------- Create Post -----------*/
+.create_post_externo{
+    padding: 20px;
+}
+.create_post{
+    margin: auto;
+    padding: 20px;
+    height: fit-content;
+    background: linear-gradient(90deg, brown, black);
+    width: 35rem;
+    border-radius: 2rem;
+    color: white;
+}
+.create_post form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.create_post th{
+    padding: 10px 5px;
+}
+.custom_placeholder::placeholder{
+    font-family: 'Lobster', sans-serif;
+    font-size: 1.5rem;
+}
+.custom_checkbox{
+    display: flex;
+    justify-content: center;
+}
+.custom_checkbox label{
+    margin-right: 1rem;
+}
+
+/*--------- Edit Post -----------*/
+.edit_post{
+    width: 50%;
+    margin: auto;
+    padding: 1rem 0;
+}
+.edit_post img{
+    width: 20%;
+}
+
+.edit_post .texto{
+    background-color: brown;
+    padding: 1rem 1rem 5rem 1rem;
+    border-radius: 1rem;
+    border: solid .2rem brown;
+    margin-bottom: 1rem;
+}
+
+
+
+/*--------- Delete Post -----------*/
+.delete_post{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+.delete_post_menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+/*--------- Confirm button -----------*/
+.confirm_button , .cancel_button, .confirm_button, .cancel_button{
+    display: inline-block;
+    width: 6rem;
+    border-radius: 5px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: .4rem;
+    margin: .4rem 3rem;
+    text-align: center;
+    background-color: white;
+    color: black;
+}
+.confirm_button:hover{
+    background-color: rgb(6, 238, 6);
+    transition: .2s linear;
+    transform: scale(1.1);
+    color: white;
+}
+.cancel_button:hover, .delete_button:hover{
+    background-color: rgb(238, 6, 6);
+    transition: .2s linear;
+    transform: scale(1.1) !important;
+    color: white;
+}
+.delete_button{
+    display: block;
+    width: 13rem;
+    border-radius: 5px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: .4rem;
+    margin: 1rem auto;
+    text-align: center;
+}
 
 
 /*-------------  Footer -----------------*/
@@ -125,31 +387,37 @@ footer{
 
 /*------------ 768 px ----------------*/
 @media (max-width: 48rem) {
-    
-    /*-------------  navbar -------------*/
     .navbar{
+        display: flex;
+        flex-direction: column;
         position: absolute;
-        top: 6.25rem;
-        right: 0;
-        transform: scale(0);
-        transform-origin: right top;
-        transition: .5s linear;
+        background: linear-gradient(90deg, brown, black);
+        top: 8.5rem;
+        left: 0;
+        width: 100%;
+        transform: scaleY(0);
+        transition: .3s linear;
+        transform-origin: top;
+        z-index: 1;
+        opacity: .9;
+    }
+    .navbar ul{
+        flex-direction: column;
     }
     .navbar ul li a{
         display: block;
-        text-align: right;
         margin-right: 3rem;
     }
     input:checked ~ .navbar{
         transform: scale(1);
     }
     .navbar ul:hover li a{
-        transform: scaleX(1.3) translateX(-10%);
+        transform: scaleX(1.3);
         filter: blur(3px);
     } 
     .navbar ul li a:hover{
         filter: blur(0px);
-        transform: scale(1.3) translateX(-15%);
+        transform: scale(1.3);
     }
 
 
@@ -161,5 +429,7 @@ footer{
     input:checked ~ .fa-bars::before{
         content: '\f00d';
     }
+    .crear_publicacion_menu_interno{
+        top: 2rem;
+    }
 }
-
