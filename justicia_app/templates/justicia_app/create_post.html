@@ -1,6 +1,7 @@
 {% extends './base.html' %}
 {% load static %}
 {% block content %}
+<div class="create_post_externo">
     <div class="create_post">
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -11,4 +12,5 @@
             </div>
         </form>
     </div>
+</div>
 {% endblock  %}

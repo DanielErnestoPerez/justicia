@@ -3,14 +3,20 @@ from .models import Post
 class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('titulo', 'contenido','imagen_fondo', 'tags')
+        fields = ('titulo','imagen_fondo','imagen_portada', 'tags', 'resumen', 'contenido')
         labels = {
             'tags': 'Category',
         }
         widgets = {
+            'resumen': forms.Textarea(attrs={
+                'rows': 3,
+                'cols': 45,
+                'placeholder': 'Escribe un resumen aquí...',
+                'class': 'custom_placeholder',
+            }),
             'contenido': forms.Textarea(attrs={
                 'rows': 5,
-                'cols': 24,
+                'cols': 45,
                 'placeholder': 'Escribe tu contenido aquí...',
                 'class': 'custom_placeholder',
             }),
