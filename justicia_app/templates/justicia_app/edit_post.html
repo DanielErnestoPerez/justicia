@@ -9,10 +9,10 @@
                 <img src="{{post.imagen_portada.url}}" alt="">
             </article>
         </div>
-        {{post.titulo}}
         <form action="" method="post">
             {% csrf_token %}
             <div class="texto">
+                {{post.titulo}}
                 <p>{{edit_post.resumen}}</p>
                 <p>{{edit_post.contenido}}</p>
                 <p>{{edit_post.tags}}</p>
