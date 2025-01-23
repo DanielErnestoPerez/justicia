@@ -3,7 +3,7 @@ from .models import Post
 class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('titulo','imagen_fondo','imagen_portada', 'tags', 'resumen', 'contenido')
+        fields = ('titulo', 'tags','imagen_fondo','imagen_portada', 'resumen', 'contenido')
         labels = {
             'tags': 'Category',
         }
@@ -13,6 +13,9 @@ class CreatePost(forms.ModelForm):
                 'cols': 45,
                 'placeholder': 'Escribe un título aquí...',
                 'class': 'custom_placeholder',
+            }),
+            'tags': forms.CheckboxSelectMultiple(attrs={
+                'class': 'custom_checkbox',
             }),
             'resumen': forms.Textarea(attrs={
                 'rows': 3,
@@ -26,27 +29,37 @@ class CreatePost(forms.ModelForm):
                 'placeholder': 'Escribe tu contenido aquí...',
                 'class': 'custom_placeholder',
             }),
-            'tags': forms.CheckboxSelectMultiple(attrs={
-                'class': 'custom_checkbox',
-            }),
         }
 
 
 class EditPost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('contenido', 'tags')
+        fields = ('titulo', 'tags','imagen_fondo','imagen_portada', 'resumen', 'contenido')
         labels = {
             'tags': 'Category',
         }
         widgets = {
-            'contenido': forms.Textarea(attrs={
-                'rows': 3,
-                'cols': 30,
-                'placeholder': 'Escribe tu contenido aquí...',
+            'titulo': forms.Textarea(attrs={
+                'rows': 2,
+                'cols': 45,
+                'placeholder': 'Escribe un título aquí...',
                 'class': 'custom_placeholder',
             }),
             'tags': forms.CheckboxSelectMultiple(attrs={
                 'class': 'custom_checkbox',
             }),
+            'resumen': forms.Textarea(attrs={
+                'rows': 3,
+                'cols': 85,
+                'placeholder': 'Escribe un resumen aquí...',
+                'class': 'custom_placeholder',
+            }),
+            'contenido': forms.Textarea(attrs={
+                'rows': 10,
+                'cols': 85,
+                'placeholder': 'Escribe tu contenido aquí...',
+                'class': 'custom_placeholder',
+            }),
         }
+

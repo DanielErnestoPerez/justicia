@@ -1,0 +1,24 @@
+{% extends './base.html' %}
+{% load static %}
+{% block content %}
+    <div class="edit_post">
+        <h2>Edit Post</h2>
+        <div>   
+            <article>
+                <img src="{{post.imagen_fondo.url}}" alt="">
+                <img src="{{post.imagen_portada.url}}" alt="">
+            </article>
+        </div>
+        {{post.titulo}}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="texto">
+                <p>{{edit_post.resumen}}</p>
+                <p>{{edit_post.contenido}}</p>
+                <p>{{edit_post.tags}}</p>
+            </div>
+            <input type="submit" value="Confirm" class='confirm_button'>
+            <a href="{{ request.GET.next|default:'/publicaciones' }}" class='cancel_button'>Cancel</a>
+        </form>
+    </div>
+{% endblock  %}

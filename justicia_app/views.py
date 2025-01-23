@@ -30,6 +30,19 @@ def create_post(request):
         create_post = CreatePost()
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
 
+def edit_post(request, post_id):
+    post_to_edit = Post.objects.get(id=post_id)
+    edit_post = EditPost(instance=post_to_edit)
+    if request.method == 'POST':
+        edit_post = EditPost(request.POST, instance=post_to_edit)
+        if edit_post.is_valid():
+            messages.success(request, 'Post updated successfully!')
+            edit_post.save()
+            return redirect('publicaciones')
+        else:
+            print('Error updating', edit_post.errors)
+    return render(request, 'justicia_app/edit_post.html', {'post': post_to_edit, 'edit_post': edit_post})
+
 def delete_post(request, post_id):
     post_to_delete = Post.objects.get(id=post_id)
     if request.method == 'POST':
