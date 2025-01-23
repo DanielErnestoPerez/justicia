@@ -1,26 +1,48 @@
 {% extends './base.html' %}
 {% load static %}
 {% block content %}
-<div class="publicaciones_general">
-    <div class="container">
-        <div class="row">
-            {% for post in posts  %}
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="publicaciones_titulo">
-                            {{post.titulo}}
-                            usuario
+<div class="container">
+<div class="row">
+    {% for post in posts  %}
+        <div class="col-md-3">
+            <div class="card">
+                <div class="publicaciones_titulo">
+                    <p>{{post.titulo}}</p>
+                    <p>usuario</p>
+                </div>
+                <div class="publicaciones_contenido">
+                    <article>
+                        <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
+                        <a href="#">
+                            <img class="card-img-top" src="{{post.imagen_portada.url}}" alt="">
+                        </a>
+                    </article>
+                
+                    <div class="card-body">
+                        <h4 class="card-title">{{post.titulo}}</h4>
+                        <div class="tags">
+                            {% for tag in post.tags.all %}
+                                <a href="{% url 'category' tag.slug %}">
+                                    <span class='tag'>{{ tag }}</span>
+                                </a>
+                            {% endfor %}
                         </div>
-                        <a href="#"><img class="card-img-top" src="{{post.imagen.url}}" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">{{post.titulo}}</h4>
-                            <p class="card-text">{{post.contenido}}</p>
+                        <div class="sub-menu">
+                            <div class="comentarios">
+                                <a href="#">Comentarios</a>
+                            </div>
+                            <div class="editar_publicacion">
+                                <a href="#"><i class="fa-solid fa-heart"></i></a>
+                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#"><i class="fa-solid fa-trash"></i></a>
+                            </div>
                         </div>
+                        <p class="card-text">{{post.resumen}}</p>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
         </div>
-        </div>
+    {% endfor %}
+</div>
 </div>
 {% endblock  %}
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, numquam? Adipisci architecto harum illo quaerat consectetur, sapiente atque ut tempora nesciunt nihil, eligendi soluta consequatur, molestiae consequuntur. Beatae, error deleniti.
