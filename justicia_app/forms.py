@@ -3,7 +3,7 @@ from .models import Post
 class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('titulo', 'contenido','imagen', 'tags')
+        fields = ('titulo', 'contenido','imagen_fondo', 'tags')
         labels = {
             'tags': 'Category',
         }
