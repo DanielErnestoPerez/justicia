@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     titulo = models.CharField(max_length=200)
+    resumen = models.CharField(max_length=300)
     contenido = models.TextField()
-    imagen = models.ImageField(upload_to='posts', blank=True, null=True)
+    imagen_fondo = models.ImageField(upload_to='posts')
+    imagen_portada = models.ImageField(upload_to='posts')
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
     tags = models.ManyToManyField('Tag')
     created = models.DateTimeField(auto_now_add=True)
