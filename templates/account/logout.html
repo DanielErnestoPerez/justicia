@@ -1,19 +1,20 @@
-{% extends "awesome_app/base.html" %}
+{% extends "justicia_app/base.html" %}
 {% load allauth i18n %}
 
 {% block content %}
+<div class="create_post_externo">
     <div class="create_post">
-        <h1>{% trans "Sign Out" %}</h1>
-        <p>{% trans 'Are you sure you want to sign out?' %}</p>
-
+        <h1>{% trans "Log Out" %}</h1>
+        <p>{% trans 'Are you sure you want to log out?' %}</p>
         {% url 'account_logout' as action_url %}
         <form method="post" action="{{ action_url }}">
             {% csrf_token %}
             {{ redirect_field }}
-
-            <button type="submit" class='button_signout'>
-                {% trans 'Sign Out' %}
-            </button>
+            <div class="logout_menu">
+                <input type="submit" value="Log Out" class='confirm_button'>
+                <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
+            </div>
         </form>
     </div>
+</div>
 {% endblock content %}

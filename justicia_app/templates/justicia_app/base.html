@@ -13,7 +13,6 @@
 <body>
     <div class="contenedor">
     <header>
-        <!-- Logo -->
         <div class="logo">
             <a href="#">Justicia Restaurativa <br>Cuba</a>
         </div>
@@ -21,32 +20,40 @@
         <!-- Menú principal -->
         <input type="checkbox" class="menu-bar" name="" id="menu-bar" hidden="true">
         <label for="menu-bar" class="fa fa-bars"></label>
+
         
-        
-        <nav class="navbar">
-            <ul>
-                <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'publicaciones' %}">Publicaciones</a></li>
-                <li><a href="#">Redes Sociales</a></li>
-            </ul>
-            <div class="crear_publicacion_menu">
-                <img src="{% static './img/usuario_foto.jpg' %}" alt="">
-                <p>Perfil Administradores</p>
-                <input type="checkbox" name="" id="menu-bar-interno" hidden="true">
-                <label for="menu-bar-interno" class="fa-solid fa-angle-down"></label>
-            
-                <!-- Submenu -->
-                <div class="crear_publicacion_menu_interno">
-                    <ul>
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Edit Profile</a></li>
-                        <li><a href="{% url 'create_post' %}">Crear Publicacion</a></li>
-                        <li><a href="#">Log out</a></li>
-                    </ul>
+        {% if user.is_authenticated %}
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                    <li><a href="{% url 'publicaciones' %}">Publicaciones</a></li>
+                    <li><a href="#">Redes Sociales</a></li>
+                </ul>
+                <div class="crear_publicacion_menu">
+                    <img src="{% static './img/usuario_foto.jpg' %}" alt="">
+                    <p>{{user.username}}</p>
+                    <input type="checkbox" name="" id="menu-bar-interno" hidden="true">
+                    <label for="menu-bar-interno" class="fa-solid fa-angle-down"></label>
+                
+                    <!-- Submenu -->
+                    <div class="crear_publicacion_menu_interno">
+                        <ul>
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="{% url 'create_post' %}">Crear Publicacion</a></li>
+                            <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+        {% else %}
+            <div class="login">
+                <ul>
+                    <li><a href="{% url 'account_login' %}">Log in</a></li>
+                    <li><a href="{% url 'account_signup' %}">Sign up</a></li>
+                </ul>
             </div>
-        </nav>
-        
+        {% endif %}
     </header>
 
     <main>

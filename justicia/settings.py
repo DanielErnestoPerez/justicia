@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_cleanup.apps.CleanupConfig',
     'admin_honeypot',
-    'justicia_app',
+    'justicia_app', 
     'usuarios',
 ]
 
