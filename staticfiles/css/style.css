@@ -355,13 +355,6 @@ article:hover img:last-child{
 }
 
 
-
-
-
-
-
-
-
 /*--------- Confirm button -----------*/
 .confirm_button , .cancel_button{
     display: inline-block;
@@ -412,6 +405,74 @@ article:hover img:last-child{
 }
 .entrance_login p{
     margin: .5rem 0;
+}
+
+
+
+/*--------------- Profile ----------------*/
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, brown, black);
+    width: 50%;
+    min-width: 23rem;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 20px;
+}
+.profile a, .profile p{
+    color: white;
+    margin: .5rem 0;
+}
+.profile img{
+    width: 10rem;
+    border-radius: 15px;
+}
+
+.interacciones ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+.interacciones li{
+    display: flex;
+
+    margin: auto;
+    gap: 1rem;
+}
+.interacciones a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding: 0 1.4rem;
+    border-radius: 10px;
+}
+
+
+/*--------------- Profile Edit ----------------*/
+.profile_edit{
+    margin: 0 auto 2rem auto;
+    width: 37%;
+    border-radius: 20px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 2rem 4rem;
+}
+#id_image{
+    width: 100%;
+}
+
+/*--------------- Profile Delete ----------------*/
+.profile_delete{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
 }
 
 
