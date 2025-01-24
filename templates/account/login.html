@@ -4,67 +4,69 @@
 {% load allauth account %}
 
 {% block head_title %}
-    {% trans "Sign In" %}
+    {% trans "Log In" %}
 {% endblock head_title %}
 
 {% block content %}
-<div class="create_post">
-    <h1>{% trans "Sign In" %}</h1>
+<div class="create_post_externo">
+    <div class="create_post">
+            <h1>{% trans "Log In" %}</h1>
 
-    {% if not SOCIALACCOUNT_ONLY %}
-        <p>
-            {% trans "If you have not created an account yet, then please" %}
-            <a href="{{ signup_url }}">{% trans "sign up" %}</a>
-            {% trans "first." %}
-        </p>
+            {% if not SOCIALACCOUNT_ONLY %}
+                <p>
+                    {% trans "If you have not created an account yet, then please" %}
+                    <a href="{{ signup_url }}">{% trans "sign up" %}</a>
+                    {% trans "first." %}
+                </p>
 
-        {% url 'account_login' as login_url %}
-        <form method="post" action="{{ login_url }}" class="entrance_login">
-            {% csrf_token %}
-            
-            <div class="form-fields">
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-            </div>
+                {% url 'account_login' as login_url %}
+                <form method="post" action="{{ login_url }}" class="entrance_login">
+                    {% csrf_token %}
+                    
+                    <div class="form-fields">
+                        {% element fields form=form unlabeled=True %}
+                        {% endelement %}
+                    </div>
 
-            {{ redirect_field }}
+                    {{ redirect_field }}
 
-            <div class="form-actions">
-                <button type="submit" class="button_login">
-                    {% trans "Sign In" %}
-                </button>
-            </div>
-        </form>
-    {% endif %}
-
-    {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
-        <hr />
-
-        <div class="button-group vertical">
-            {% if PASSKEY_LOGIN_ENABLED %}
-                <button type="submit" form="mfa_login" id="passkey_login" class="prominent login outline primary">
-                    {% trans "Sign in with a passkey" %}
-                </button>
+                    <div class="form-actions">
+                        <button type="submit" class="button_login">
+                            {% trans "Sign In" %}
+                        </button>
+                    </div>
+                </form>
             {% endif %}
-            
-            {% if LOGIN_BY_CODE_ENABLED %}
-                <a href="{{ request_login_code_url }}" class="prominent login outline primary">
-                    {% trans "Mail me a sign-in code" %}
-                </a>
+
+            {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+                <hr />
+
+                <div class="button-group vertical">
+                    {% if PASSKEY_LOGIN_ENABLED %}
+                        <button type="submit" form="mfa_login" id="passkey_login" class="prominent login outline primary">
+                            {% trans "Sign in with a passkey" %}
+                        </button>
+                    {% endif %}
+                    
+                    {% if LOGIN_BY_CODE_ENABLED %}
+                        <a href="{{ request_login_code_url }}" class="prominent login outline primary">
+                            {% trans "Mail me a sign-in code" %}
+                        </a>
+                    {% endif %}
+                </div>
             {% endif %}
-        </div>
-    {% endif %}
 
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
-{% endblock content %}
+            {% if SOCIALACCOUNT_ENABLED %}
+                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+            {% endif %}
+        {% endblock content %}
 
-{% block extra_body %}
-    {{ block.super }}
-    
-    {% if PASSKEY_LOGIN_ENABLED %}
-        {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
-    {% endif %}
-{% endblock %}
+    {% block extra_body %}
+        {{ block.super }}
+        
+        {% if PASSKEY_LOGIN_ENABLED %}
+            {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
+        {% endif %}
+    {% endblock %}
+    </div>
 </div>
