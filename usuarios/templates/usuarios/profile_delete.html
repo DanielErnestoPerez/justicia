@@ -1,5 +1,14 @@
-{% extends 'awesome_app/base.html' %}
+{% extends 'justicia_app/base.html' %}
 {% load static %}
 {% block content %}
-
+    <div class="profile_delete">
+        <h1>Delete Account</h1>
+        <p>Are you sure you want to delete your account?</p>
+        <form action="" method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <input type="submit" value="Confirm" class='confirm_button'>
+            <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
+        </form>
+    </div>
+    
 {% endblock  %}

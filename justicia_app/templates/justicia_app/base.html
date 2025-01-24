@@ -22,7 +22,7 @@
         <label for="menu-bar" class="fa fa-bars"></label>
 
         
-        {% if not user.is_authenticated %}
+        {% if user.is_authenticated %}
             <nav class="navbar">
                 <ul>
                     <li><a href="{% url 'home' %}">Inicio</a></li>
@@ -38,7 +38,7 @@
                     <!-- Submenu -->
                     <div class="crear_publicacion_menu_interno">
                         <ul>
-                            <li><a href="#">My Profile</a></li>
+                            <li><a href="{% url 'profile' %}">My Profile</a></li>
                             <li><a href="#">Edit Profile</a></li>
                             <li><a href="{% url 'create_post' %}">Crear Publicacion</a></li>
                             <li><a href="{% url 'account_logout' %}">Log out</a></li>

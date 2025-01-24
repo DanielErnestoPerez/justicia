@@ -1,5 +1,50 @@
-{% extends 'awesome_app/base.html' %}
+{% extends 'justicia_app/base.html' %}
 {% load static %}
 {% block content %}
+    <div class="profile">
+        <img src="{{ user.profile.avatar }}" alt="">
+        <a href="#">{{ user.profile.name }}</a>
+        <a href="#">{{ profile.user.username }}</a>
+        
+        {% if profile.location %}
+            <a href="#"><i class="fa-solid fa-location-dot"></i> {{profile.location}}</a>
+        {% else %}
+            No location selected
+        {% endif %}
+        
+        {% if profile.bio %}
+            <p>{{profile.bio}}</p>
+        {% else %}
+            No bio specified
+        {% endif %}
+            
+    </div>
 
+    <div class="interacciones">
+        <ul>
+            <li>
+                <a href="#">Latest</a>
+                <a href="#">Top Posts</a>
+                <a href="#">Top Comments</a>
+                <a href="#">Liked Posts</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+    <div class="row">
+        {% for home_post in home_posts %}
+            <div class="col-md-4">
+                <div class="card">
+                    <a href="{% url 'read_post' home_post.id %}"><img class="card-img-top" src="{{home_post.imagen.url}}" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">{{home_post.titulo}}</h4>
+                        <p class="card-text">{{home_post.contenido}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    
 {% endblock  %}
