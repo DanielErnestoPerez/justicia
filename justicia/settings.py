@@ -38,7 +38,7 @@ else:
     }
     
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['justicia-hgin.onrender.com', '127.0.0.1']
 
 INTERNAL_IPS = (
     '127.0.0.1',
