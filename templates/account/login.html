@@ -30,10 +30,9 @@
 
                     {{ redirect_field }}
 
-                    <div class="form-actions">
-                        <button type="submit" class="button_login">
-                            {% trans "Sign In" %}
-                        </button>
+                    <div class="allauth_menu">
+                        <input type="submit" value="Log in" class='confirm_button'>
+                        <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
                     </div>
                 </form>
             {% endif %}
