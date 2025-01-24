@@ -10,7 +10,7 @@
         <form method="post" action="{{ action_url }}">
             {% csrf_token %}
             {{ redirect_field }}
-            <div class="logout_menu">
+            <div class="allauth_menu">
                 <input type="submit" value="Log Out" class='confirm_button'>
                 <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
             </div>
