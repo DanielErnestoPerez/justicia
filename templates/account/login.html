@@ -27,9 +27,7 @@
                         {% element fields form=form unlabeled=True %}
                         {% endelement %}
                     </div>
-
                     {{ redirect_field }}
-
                     <div class="allauth_menu">
                         <input type="submit" value="Log in" class='confirm_button'>
                         <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
