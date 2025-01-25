@@ -30,6 +30,11 @@ def create_post(request):
         create_post = CreatePost()
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
 
+def read_post(request, post_id):
+    post_to_read = Post.objects.get(id=post_id)
+    categories = Tag.objects.all()
+    return render(request, 'justicia_app/read_post.html', {'post': post_to_read, 'categories': categories})
+
 def edit_post(request, post_id):
     post_to_edit = Post.objects.get(id=post_id)
     edit_post = EditPost(instance=post_to_edit)
