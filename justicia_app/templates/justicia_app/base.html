@@ -30,7 +30,7 @@
                     <li><a href="#">Redes Sociales</a></li>
                 </ul>
                 <div class="crear_publicacion_menu">
-                    <img src="{% static './img/usuario_foto.jpg' %}" alt="">
+                    <img src="{{ user.profile.avatar }}" alt="">
                     <p>{{user.username}}</p>
                     <input type="checkbox" name="" id="menu-bar-interno" hidden="true">
                     <label for="menu-bar-interno" class="fa-solid fa-angle-down"></label>
