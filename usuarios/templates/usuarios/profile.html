@@ -34,13 +34,40 @@
 
     <div class="container">
     <div class="row">
-        {% for home_post in home_posts %}
-            <div class="col-md-4">
+        {% for post in posts  %}
+            <div class="col-md-3">
                 <div class="card">
-                    <a href="{% url 'read_post' home_post.id %}"><img class="card-img-top" src="{{home_post.imagen.url}}" alt=""></a>
+                    <div class="publicaciones_titulo">
+                        <p>{{post.titulo}}</p>
+                        <p>{{post.author}}</p>
+                    </div>
+                    <article>
+                        <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
+                        <a href="#">
+                            <img class="card-img-top" src="{{post.imagen_portada.url}}" alt="">
+                        </a>
+                    </article>
+                
                     <div class="card-body">
-                        <h4 class="card-title">{{home_post.titulo}}</h4>
-                        <p class="card-text">{{home_post.contenido}}</p>
+                        <h4 class="card-title">{{post.titulo}}</h4>
+                        <div class="tags">
+                            {% for tag in post.tags.all %}
+                                <a href="{% url 'category' tag.slug %}">
+                                    <span class='tag'>{{ tag }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div class="sub-menu">
+                            <div class="comentarios">
+                                <a href="#">Comentarios</a>
+                            </div>
+                            <div class="editar_publicacion">
+                                <a href="#"><i class="fa-solid fa-heart"></i></a>
+                                <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </div>
+                        <p class="card-text">{{post.resumen}}</p>
                     </div>
                 </div>
             </div>
