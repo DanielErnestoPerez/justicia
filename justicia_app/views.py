@@ -18,6 +18,8 @@ def publicaciones(request, tag=None):
     return render(request, 'justicia_app/publicaciones.html', 
                 {'posts': posts, 'categories': categories, 'tag': tag})
 
+def redes_sociales(request):
+    return render(request, 'justicia_app/redes_sociales.html')
 
 def create_post(request):
     if request.method == 'POST':

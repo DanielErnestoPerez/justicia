@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('category/<tag>/', views.publicaciones, name='category'),
     path('publicaciones/', views.publicaciones, name='publicaciones'),
+    path('redes_sociales/', views.redes_sociales, name='redes_sociales'),
     path('create_post/', views.create_post, name='create_post'),
     path('read_post/<post_id>/', views.read_post, name='read_post'),
     path('edit_post/<post_id>/', views.edit_post, name='edit_post'),
