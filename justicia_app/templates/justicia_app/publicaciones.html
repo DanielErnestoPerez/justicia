@@ -12,7 +12,7 @@
                 </div>
                 <article>
                     <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
-                    <a href="#">
+                    <a href="{% url 'read_post' post.id %}">
                         <img class="card-img-top" src="{{post.imagen_portada.url}}" alt="">
                     </a>
                 </article>

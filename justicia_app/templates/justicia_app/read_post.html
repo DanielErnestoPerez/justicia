@@ -1,5 +1,39 @@
 {% extends './base.html' %}
 {% load static %}
 {% block content %}
+<div class="read_post">
+    <div class="encabezado">
+        <div class="publicaciones_titulo">
+            <p>{{post.titulo}}</p>
+            <p>{{post.author}}</p>
+        </div>
+        <article>
+            <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
+            <a href="{% url 'read_post' post.id %}">
+                <img class="card-img-top" src="{{post.imagen_portada.url}}" alt="">
+            </a>
+        </article>
+        <div class="tags">
+            {% for tag in post.tags.all %}
+                <a href="{% url 'category' tag.slug %}">
+                    <span class='tag'>{{ tag }}</span>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="sub-menu">
+            <div class="comentarios">
+                <a href="#">Comentarios</a>
+            </div>
+            <div class="editar_publicacion">
+                <a href="#"><i class="fa-solid fa-heart"></i></a>
+                <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="contenido_publicaciones">
+        {{post.contenido}}
+    </div>
+</div>
 
 {% endblock  %}

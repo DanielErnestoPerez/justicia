@@ -22,7 +22,7 @@
         <label for="menu-bar" class="fa fa-bars"></label>
 
         
-        {% if not user.is_authenticated %}
+        {% if user.is_authenticated %}
             <nav class="navbar">
                 <ul>
                     <li><a href="{% url 'home' %}">Inicio</a></li>

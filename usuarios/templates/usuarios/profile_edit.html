@@ -11,8 +11,10 @@
     <form action="" class='profile_edit' method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ profile_edit.as_p }}
-        <input type="submit" value="Confirm" class='confirm_button'>
-        <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
+        <div style="display: flex">
+            <input type="submit" value="Confirm" class='confirm_button'>
+            <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
+        </div>
         <div>
             <a href="{% url 'profile_delete' %}" class='delete_button'>Delete Profile</a>
         </div>
