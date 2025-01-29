@@ -36,7 +36,9 @@
                             <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </div>
-                    <p class="card-text">{{post.resumen}}</p>
+                    <a href="{% url 'read_post' post.id %}">
+                        <p class="card-text">{{post.resumen}}</p>
+                    </a>
                 </div>
             </div>
         </div>
