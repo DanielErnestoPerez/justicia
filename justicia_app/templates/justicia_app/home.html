@@ -1,18 +1,119 @@
 {% extends './base.html' %}
 {% load static %}
 {% block content %}
-<div class="home_menu_lateral">
-    <ul>
-        <li>
-            <a href="#">Que es la justicia restaurativa?</a>
-            <a href="#">Beneficios de la justicia restaurativa</a>
-            <a href="#">Metodos y procesos</a>
-            <a href="#">Casos de exito</a>
-            <a href="#">Areas de aplicacion</a>
-            <a href="#">Recursos y herramientas</a>
-            <a href="#">FAQ(Preguntas Frecuentes)</a>
-            <a href="#">Noticias y actualizaciones</a>
-        </li>
-    </ul>
+
+{% if user.is_authenticated %}
+<div class="home_menu_externo">
+    <div class="home_menu_lateral">
+        <ul class="accordion">
+            <li>
+                <label for="1">¿Qué es la justicia restaurativa? <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="1">
+                <div class="contenido_accordion">
+                    Justicia Restaurativa es un enfoque alternativo de resolución de conflictos que busca reparar el daño causado por un delito o conflicto, priorizando las necesidades de las víctimas, la responsabilidad de los ofensores y la participación activa de la comunidad.
+                </div>
+            </li>
+            <li>
+                <label for="2">Beneficios de la justicia restaurativa <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="2">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">Para víctimas</a></li>
+                        <li><a href="#">Para infractores</a></li>
+                        <li><a href="#">Para la comunidad</a></li>
+                        <li><a href="#">Para el sistema judicial</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <label for="3">Métodos y procesos <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="3">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">Círculos restaurativos</a></li>
+                        <li><a href="#">Mediación víctima-infractor</a></li>
+                        <li><a href="#">Conferencias grupales</a></li>
+                        <li><a href="#">Prácticas dialógicas</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <label for="4">Casos de éxito <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="4">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">Programas escolares contra el bullying</a></li>
+                        <li><a href="#">Reinserción de jóvenes infractores</a></li>
+                        <li><a href="#">Conflictos vecinales resueltos</a></li>
+                        <li><a href="#">Experiencias en prisiones</a></li>
+                        <li><a href="#">Casos internacionales destacados</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <label for="5">Áreas de aplicación <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="5">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">En el ámbito educativo</a></li>
+                        <li><a href="#">En el sistema penal</a></li>
+                        <li><a href="#">En comunidades locales</a></li>
+                        <li><a href="#">En el ámbito laboral</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <label for="6">Recursos y herramientas <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="6">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">Guías prácticas</a></li>
+                        <li><a href="#">Materiales de formación</a></li>
+                        <li><a href="#">Documentación legal</a></li>
+                        <li><a href="#">Bibliografía recomendada</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <label for="7">FAQ (Preguntas Frecuentes) <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="7">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">¿En qué se diferencia de la justicia tradicional?</a></li>
+                        <li><a href="#">¿Es aplicable a todo tipo de delitos?</a></li>
+                        <li><a href="#">¿Cómo se garantiza la seguridad de las víctimas?</a></li>
+                        <li><a href="#">¿Qué resultados se han demostrado?</a></li>
+                        <li><a href="#">¿Cuánto dura un proceso restaurativo?</a></li>
+                        <li><a href="#">¿Cómo puedo participar?</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <label for="8">Noticias y actualizaciones <span>&#x3e;</span></label>
+                <input type="checkbox" name="accordion" id="8">
+                <div class="contenido_accordion">
+                    <ul>
+                        <li><a href="#">Guías prácticas</a></li>
+                        <li><a href="#">Materiales de formación</a></li>
+                        <li><a href="#">Documentación legal</a></li>
+                        <li><a href="#">Bibliografía recomendada</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="home_menu_principal">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente repellendus eius tenetur commodi debitis neque tempore porro suscipit exercitationem numquam illo dolore fuga officiis ut iste, ratione ex fugiat nobis?
+    </div>
 </div>
+{% else %}
+    <div class="create_post">
+        <h1>Bienvenido a Justicia Restaurativa Cuba</h1>
+        <p>Esta es una plataforma de información sobre la justicia restaurativa, diseñada para apoyar a las personas que buscan mejorar su calidad de vida y la seguridad de sus familias.</p>
+        <p>Para acceder a la información, inicia sesión o regístrate.</p>
+        <a href="{% url 'account_login' %}">Iniciar sesión</a>
+        <a href="{% url 'account_signup' %}">Regístrate</a>
+    </div>
+{% endif %}
+
 {% endblock  %}
