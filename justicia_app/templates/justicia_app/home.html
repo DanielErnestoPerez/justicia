@@ -107,6 +107,7 @@
     </div>
 </div>
 {% else %}
+<div class="create_post_externo">
     <div class="create_post">
         <h1>Bienvenido a Justicia Restaurativa Cuba</h1>
         <p>Esta es una plataforma de información sobre la justicia restaurativa, diseñada para apoyar a las personas que buscan mejorar su calidad de vida y la seguridad de sus familias.</p>
@@ -114,6 +115,7 @@
         <a href="{% url 'account_login' %}">Iniciar sesión</a>
         <a href="{% url 'account_signup' %}">Regístrate</a>
     </div>
+</div>
 {% endif %}
 
 {% endblock  %}
