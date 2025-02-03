@@ -15,7 +15,7 @@ import dj_database_url
 from pathlib import Path
 from environ import Env
 env = Env()
-env.read_env()
+Env.read_env()
 ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 
