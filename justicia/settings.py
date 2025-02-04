@@ -19,7 +19,7 @@ Env.read_env()
 ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 
-if ENVIRONMENT == 'development':
+if ENVIRONMENT == 'production':
     DEBUG=True
     DATABASES = {
         'default': {
