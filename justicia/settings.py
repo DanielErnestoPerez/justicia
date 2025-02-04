@@ -21,24 +21,23 @@ ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 if ENVIRONMENT == 'production':
     DEBUG=True
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME':'justicia_database',
-            'USER':'postgres',
-            'PASSWORD':'Daniel25',
-            'HOST':'localhost',
-            'PORT':'5433',
-        }
-    }
 else:
     DEBUG=False
-    DATABASES = {
-        'default': dj_database_url.parse(env('DATABASE_URL'))
-    }
-    
 
-ALLOWED_HOSTS = ['localhost', 'justicia-hgin.onrender.com', '127.0.0.1']
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':'justicia_database',
+        'USER':'postgres',
+        'PASSWORD':'Daniel25',
+        'HOST':'localhost',
+        'PORT':'5433',
+    }
+}
+
+DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
+
+ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = (
     '127.0.0.1',
