@@ -34,8 +34,9 @@ DATABASES = {
         'PORT':'5433',
     }
 }
-
-DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
+POSTGRES_LOCALLY = True
+if ENVIRONMENT == 'production'or POSTGRES_LOCALLY == True:
+    DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
 ALLOWED_HOSTS = ['*']
 
