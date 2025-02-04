@@ -19,7 +19,7 @@ Env.read_env()
 ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 
-if ENVIRONMENT == 'production':
+if ENVIRONMENT == 'development':
     DEBUG=True
 else:
     DEBUG=False
