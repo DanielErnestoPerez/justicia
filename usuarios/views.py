@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def profile(request, username=None):
@@ -18,6 +19,7 @@ def profile(request, username=None):
             raise Http404()
     return render(request, 'usuarios/profile.html', {'posts': posts, 'profile': profile})
 
+@login_required
 def profile_edit(request):
     profile_edit = ProfileForm(instance=request.user.profile)
     if request.method == 'POST':
@@ -28,6 +30,7 @@ def profile_edit(request):
     return render(request, 'usuarios/profile_edit.html', {'profile_edit': profile_edit})
 
 
+@login_required
 def profile_delete(request):
     user = request.user
     if request.method == 'POST':

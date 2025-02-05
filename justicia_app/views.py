@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Tag
 from .forms import CreatePost, EditPost
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
@@ -21,6 +22,8 @@ def publicaciones(request, tag=None):
 def redes_sociales(request):
     return render(request, 'justicia_app/redes_sociales.html')
 
+
+@login_required
 def create_post(request):
     if request.method == 'POST':
         create_post = CreatePost(request.POST, request.FILES)
@@ -33,12 +36,14 @@ def create_post(request):
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
 
 def read_post(request, post_id):
-    post_to_read = Post.objects.get(id=post_id)
+    post_to_read = get_object_or_404(Post, id=post_id)
     categories = Tag.objects.all()
     return render(request, 'justicia_app/read_post.html', {'post': post_to_read, 'categories': categories})
 
+
+@login_required
 def edit_post(request, post_id):
-    post_to_edit = Post.objects.get(id=post_id)
+    post_to_edit = get_object_or_404(Post, id=post_id, author=request.user)
     edit_post = EditPost(instance=post_to_edit)
     if request.method == 'POST':
         edit_post = EditPost(request.POST, instance=post_to_edit)
@@ -50,8 +55,9 @@ def edit_post(request, post_id):
             print('Error updating', edit_post.errors)
     return render(request, 'justicia_app/edit_post.html', {'post': post_to_edit, 'edit_post': edit_post})
 
+@login_required
 def delete_post(request, post_id):
-    post_to_delete = Post.objects.get(id=post_id)
+    post_to_delete = get_object_or_404(Post, id=post_id, author=request.user)
     if request.method == 'POST':
         messages.success(request, 'Post deleted successfully!')
         post_to_delete.delete()

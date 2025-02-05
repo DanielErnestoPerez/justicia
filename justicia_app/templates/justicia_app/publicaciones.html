@@ -8,7 +8,14 @@
             <div class="card">
                 <div class="publicaciones_titulo">
                     <p>{{post.titulo}}</p>
-                    <p>{{post.author}}</p>
+                    {% if post.author %}
+                        <a href="{% url 'user_profile' post.author.username %}" style="display:flex;">
+                            <img src="{{ post.author.profile.avatar }}" alt="">
+                            <p>{{ post.author.profile.name }}</p>  <!-- post.author.profile.realname y post.author.username -->
+                        </a>
+                    {% else %}
+                        <p><img src="{% static 'img/default_user.png' %}" alt="">no user</p>
+                    {% endif %}
                 </div>
                 <article>
                     <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
@@ -30,11 +37,14 @@
                         <div class="comentarios">
                             <a href="#">Comentarios</a>
                         </div>
-                        <div class="editar_publicacion">
-                            <a href="#"><i class="fa-solid fa-heart"></i></a>
-                            <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
-                        </div>
+                        
+                        {% if user.is_authenticated and user == post.author %}
+                            <div class="editar_publicacion">
+                                <a href="#"><i class="fa-solid fa-heart"></i></a>
+                                <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        {% endif %}
                     </div>
                     <a href="{% url 'read_post' post.id %}">
                         <p class="card-text">{{post.resumen}}</p>

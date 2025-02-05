@@ -39,7 +39,14 @@
                 <div class="card">
                     <div class="publicaciones_titulo">
                         <p>{{post.titulo}}</p>
-                        <p>{{post.author}}</p>
+                        {% if post.author %}
+                            <a href="{% url 'user_profile' post.author.username %}" style="display:flex;">
+                                <img src="{{ post.author.profile.avatar }}" alt="">
+                                <p>{{ post.author.profile.name }}</p>  <!-- post.author.profile.realname y post.author.username -->
+                            </a>
+                        {% else %}
+                            <p><img src="{% static 'img/default_user.png' %}" alt="">no user</p>
+                        {% endif %}
                     </div>
                     <article>
                         <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
