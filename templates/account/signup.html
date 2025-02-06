@@ -3,47 +3,17 @@
 
 
 {% block content %}
-    <div class="create_post_externo">
-        <div class="create_post">
-            <h1>{% trans "Sign Up" %}</h1>
-            <p>
-                {% trans "Already have an account? Then please" %}
-                <a href="{{ login_url }}">{% trans "sign in" %}</a>.
-            </p>
+<h1>{% trans 'Sign Up' %}</h1>
+<p>
+    {% blocktrans %}
+    Already have an account? Then please <a href="{{login_url}}"> sing in</a>.
+    {% endblocktrans %}
+</p>
 
-            {% if not SOCIALACCOUNT_ONLY %}
-                {% url 'account_signup' as action_url %}
-                <form method="post" action="{{ action_url }}" class="entrance_login">
-                    {% csrf_token %}
-                    {{ redirect_field }}
-                    {% for field in form %}
-                        <div class="form-group">
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {{ field }}
-                            {% if field.errors %}
-                                <div class="form-errors">
-                                    {{ field.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                    <div class="allauth_menu">
-                        <input type="submit" value="Sign up" class='confirm_button'>
-                        <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
-                    </div>
-                </form>
-            {% endif %}
-
-            {% if PASSKEY_SIGNUP_ENABLED %}
-                <hr />
-                <a href="{{ signup_by_passkey_url }}" class="prominent signup outline primary">
-                    {% trans "Sign up using a passkey" %}
-                </a>
-            {% endif %}
-
-            {% if SOCIALACCOUNT_ENABLED %}
-                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-            {% endif %}
-        </div>
-    </div>
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'profile_onboarding' %}">
+    <button type="submit">{% trans 'Sign up' %} &raquo;</button>
+</form>
 {% endblock content %}

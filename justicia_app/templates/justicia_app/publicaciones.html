@@ -11,10 +11,10 @@
                     {% if post.author %}
                         <a href="{% url 'user_profile' post.author.username %}" style="display:flex;">
                             <img src="{{ post.author.profile.avatar }}" alt="">
-                            <p>{{ post.author.profile.name }}</p>  <!-- post.author.profile.realname y post.author.username -->
+                            <p>{{ post.author.profile.name }}</p>
                         </a>
                     {% else %}
-                        <p><img src="{% static 'img/default_user.png' %}" alt="">no user</p>
+                        <p><img src="{% static 'img/default_user.png' %}" alt="">No user</p>
                     {% endif %}
                 </div>
                 <article>
@@ -38,13 +38,13 @@
                             <a href="#">Comentarios</a>
                         </div>
                         
-                        {% if user.is_authenticated and user == post.author %}
-                            <div class="editar_publicacion">
-                                <a href="#"><i class="fa-solid fa-heart"></i></a>
+                        <div class="editar_publicacion">
+                            <a href="#"><i class="fa-solid fa-heart"></i></a>
+                            {% if user.is_authenticated and user == post.author %}
                                 <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                     <a href="{% url 'read_post' post.id %}">
                         <p class="card-text">{{post.resumen}}</p>

@@ -18,8 +18,8 @@ def create_profile(sender, instance, created, **kwargs):
         profile.save()
 
 
-receiver(post_save, sender=Profile)
-def update_profile(sender, instance, created, **kwargs):
+@receiver(post_save, sender=Profile)
+def update_user(sender, instance, created, **kwargs):
     profile = instance
     if created == False:
         user = get_object_or_404(User, id=profile.user.id)

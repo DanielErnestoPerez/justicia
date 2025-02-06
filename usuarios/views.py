@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 # Create your views here.
 
 def profile(request, username=None):
@@ -27,7 +28,12 @@ def profile_edit(request):
         if profile_edit.is_valid():
             profile_edit.save()
             return redirect('profile')
-    return render(request, 'usuarios/profile_edit.html', {'profile_edit': profile_edit})
+        
+    if request.path == reverse('profile_onboarding'):
+        template = 'usuarios/profile_onboarding.html'
+    else:
+        template = 'usuarios/profile_edit.html'
+    return render(request, template, {'profile_edit': profile_edit})
 
 
 @login_required
