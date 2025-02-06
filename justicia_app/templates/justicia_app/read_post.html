@@ -5,7 +5,14 @@
     <div class="encabezado">
         <div class="publicaciones_titulo">
             <p>{{post.titulo}}</p>
-            <p>{{post.author}}</p>
+            {% if post.author %}
+                <a href="{% url 'user_profile' post.author.username %}" style="display:flex;">
+                    <img src="{{ post.author.profile.avatar }}" alt="">
+                    <p>{{ post.author.profile.name }}</p>
+                </a>
+            {% else %}
+                <p><img src="{% static 'img/default_user.png' %}" alt="">No user</p>
+            {% endif %}
         </div>
         <article>
             <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
@@ -26,8 +33,10 @@
             </div>
             <div class="editar_publicacion">
                 <a href="#"><i class="fa-solid fa-heart"></i></a>
-                <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+                {% if user.is_authenticated and user == post.author %}
+                    <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+                {% endif %}
             </div>
         </div>
     </div>
