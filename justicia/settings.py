@@ -168,9 +168,9 @@ else:
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': env('CLOUD_NAME'),
-    'API_KEY': env('CLOUD_API_KEY'),
-    'API_SECRET': env('CLOUD_API_SECRET'),
+    'CLOUD_NAME': 'diq80fldr',
+    'API_KEY': 852736233625136,
+    'API_SECRET': 'CLsQb_Nwl40eS_gTmg7IKQvx1T4',
 }
 
 
