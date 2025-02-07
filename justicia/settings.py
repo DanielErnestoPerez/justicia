@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv()
 from pathlib import Path
 from environ import Env
 env = Env()
@@ -170,9 +168,8 @@ else:
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'diq80fldr',
     'API_KEY': 852736233625136,
-    'API_SECRET': 'CLsQb_Nwl40eS_gTmg7IKQvx1T4',
+    'API_SECRET': 'CLsQb_Nwl40eS_gTmg7IKQvx1T4'
 }
-
 
 
 # Default primary key field type
