@@ -34,7 +34,7 @@ DATABASES = {
         'PORT':'5433',
     }
 }
-POSTGRES_LOCALLY = True
+POSTGRES_LOCALLY = False
 if ENVIRONMENT == 'production'or POSTGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
@@ -166,9 +166,9 @@ else:
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'diq80fldr',
-    'API_KEY': 852736233625136,
-    'API_SECRET': 'CLsQb_Nwl40eS_gTmg7IKQvx1T4'
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('CLOUD_API_KEY'),
+    'API_SECRET': env('CLOUD_API_SECRET'),
 }
 
 
