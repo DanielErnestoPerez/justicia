@@ -238,65 +238,6 @@ input:checked ~.fa-angle-down::before{
 
 
 
-.inicio_barra_lateral {
-    position: fixed;
-    inset: 9rem auto 0 0;
-    padding: 1rem;
-    width: var(--sb-width);
-    background-image: linear-gradient(red, brown, black);
-}
-.inicio_barra_lateral nav{
-    height: 100%;
-}
-
-.inicio_barra_lateral nav ul{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    height: 100%;
-}
-.inicio_barra_lateral nav li:last-child{
-    margin-top: auto;
-}
-
-.inicio_barra_lateral nav a{
-    display: flex;
-    align-items: center;
-    padding: .625rem .875rem;
-    gap: .625rem;
-    font-size: 1.25rem;
-    color: white;
-    line-height: 1;
-    border-radius: .375rem;
-    transition: background-color .5s ease-in-out,
-    color .5s ease-in-out;
-}
-.inicio_barra_lateral nav a.active,
-.inicio_barra_lateral nav a:hover,
-.inicio_barra_lateral nav a:focus-visible{
-    outline: none;
-    color: white;
-    background-color: brown;
-}
-
-.inicio_barra_lateral a span{
-    font-size: .875rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: 
-        opacity .3s ease-in-out,
-        visibility .3s ease-in-out;
-}
-.sb-expanded nav a span{
-    opacity: 1;
-    visibility: visible;
-}
-.sb-expanded aside .fa-chevron-right{
-    rotate: 180deg;
-}
-
-
 
 
 /*-------------  Publicaciones -------------*/
@@ -379,8 +320,17 @@ article:hover img:last-child{
 .publicaciones_titulo{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-
+.publicaciones_titulo img{
+    width: 40px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: .3rem;
+}
+.publicaciones_titulo p{
+    padding-top: .5rem;
+}
 
 .tags{
     display: flex;
