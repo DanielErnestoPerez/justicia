@@ -39,6 +39,15 @@
                 {% endif %}
             </div>
         </div>
+        caja de comentarios
+        
+        {% for comment in post.comments.all %}
+            <img src="{{ comment.author.profile.avatar }}" alt="">
+            {{comment.author.profile.name}}
+            @{{comment.author.username}}
+            {{comment.body}}
+        {% endfor %}
+            
     </div>
     <div class="contenido_publicaciones">
         {{post.contenido}}
