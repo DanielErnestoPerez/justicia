@@ -14,7 +14,7 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     <input type="submit" value="Delete" class='confirm_button'>
-                    <a href="{{ request.GET.next|default:'/publicaciones' }}" class='cancel_button'>Cancel</a>
+                    <a href="{{ request.META.HTTP_REFERER }}" class='cancel_button'>Cancel</a>
                 </form>
             </div>
         </div>

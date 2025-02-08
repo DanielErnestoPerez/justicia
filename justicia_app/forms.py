@@ -1,5 +1,6 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
+
 class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
@@ -63,3 +64,16 @@ class EditPost(forms.ModelForm):
             }),
         }
 
+class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
+        widgets = {
+            'body': forms.TextInput(attrs={
+                'placeholder': 'Add a comment',
+                'class': 'custom_comment_input',
+                }),
+        }
+        labels = {
+            'body': '',
+        }
