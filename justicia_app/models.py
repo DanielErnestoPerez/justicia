@@ -7,8 +7,8 @@ class Post(models.Model):
     titulo = models.CharField(max_length=200)
     resumen = models.CharField(max_length=300)
     contenido = models.TextField()
-    imagen_fondo = models.ImageField(upload_to='posts')
-    imagen_portada = models.ImageField(upload_to='posts')
+    imagen_fondo = models.FileField(upload_to='posts') #cambiar a file field
+    imagen_portada = models.FileField(upload_to='posts')  #cambiar a file field
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
     tags = models.ManyToManyField('Tag')
     created = models.DateTimeField(auto_now_add=True)
