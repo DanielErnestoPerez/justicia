@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.templatetags.static import static
-from django_resized import ResizedImageField
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = ResizedImageField(size=[600, 600], quality=90,  upload_to='profiles', blank=True, null=True)
+    image = CloudinaryField('image',folder= 'profile_photo', null=True)
     real_name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(unique=True, null=True)
     location = models.CharField(max_length=30, blank=True)

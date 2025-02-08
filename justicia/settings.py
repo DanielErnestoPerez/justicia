@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 import dj_database_url
+import cloudinary
 import cloudinary_storage
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
 from environ import Env
 env = Env()
@@ -172,6 +175,12 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': env('CLOUD_API_SECRET'),
 }
 
+cloudinary.config(
+    cloud_name = env('CLOUD_NAME'),
+    api_key = env('CLOUD_API_KEY'),
+    api_secret = env('CLOUD_API_SECRET'),
+    secure = True,
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

@@ -39,19 +39,29 @@
                 {% endif %}
             </div>
         </div>
-        caja de comentarios
         
         {% for comment in post.comments.all %}
             <div class="caja_comentarios">
                 <div class="comentario_author">
-                    <img src="{{ comment.author.profile.avatar }}" alt="">
-                    <a href="{% url 'user_profile' post.author.username %}">
-                        {{comment.author.profile.name}}
-                        @{{comment.author.username}}
-                    </a>
+                    {% if post.author %}
+                        <img src="{{ comment.author.profile.avatar }}" alt="">
+                        <a href="{% url 'user_profile' post.author.username %}">
+                            {{comment.author.profile.name}}
+                            @{{comment.author.username}}
+                        </a>
+                    {% else %}
+                        <p><img src="{% static 'img/default_user.png' %}" alt="">No user</p>
+                    {% endif %}
                 </div>
                 <div class="comentario_cuerpo">
                     {{comment.body}}
+                </div>
+                <div class="comentario_likes">
+                    <p>Replies</p>
+                    <div class="comentario_editar">
+                        <a href="#"><i class="fa-solid fa-heart"></i> Like</a>
+                        <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
