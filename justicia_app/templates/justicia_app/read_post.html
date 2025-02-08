@@ -28,7 +28,7 @@
             {% endfor %}
         </div>
         <div class="sub-menu">
-            <div class="comentarios">
+            <div class="comentarios_enlace">
                 <a href="#">Comentarios</a>
             </div>
             <div class="editar_publicacion">
@@ -42,10 +42,18 @@
         caja de comentarios
         
         {% for comment in post.comments.all %}
-            <img src="{{ comment.author.profile.avatar }}" alt="">
-            {{comment.author.profile.name}}
-            @{{comment.author.username}}
-            {{comment.body}}
+            <div class="caja_comentarios">
+                <div class="comentario_author">
+                    <img src="{{ comment.author.profile.avatar }}" alt="">
+                    <a href="{% url 'user_profile' post.author.username %}">
+                        {{comment.author.profile.name}}
+                        @{{comment.author.username}}
+                    </a>
+                </div>
+                <div class="comentario_cuerpo">
+                    {{comment.body}}
+                </div>
+            </div>
         {% endfor %}
             
     </div>
