@@ -27,19 +27,23 @@
                 </a>
             {% endfor %}
         </div>
-        <div class="sub-menu">
-            <div class="comentarios_enlace">
-                <a href="#">Comentarios</a>
-            </div>
-            <div class="editar_publicacion">
-                <a href="#"><i class="fa-solid fa-heart"></i></a>
-                {% if user.is_authenticated and user == post.author %}
-                    <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
-                {% endif %}
-            </div>
+        <div class="editar_publicacion">
+            <a href="#"><i class="fa-solid fa-heart"></i></a>
+            {% if user.is_authenticated and user == post.author %}
+                <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
+            {% endif %}
         </div>
         
+        <div class="anadir_comentarios">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" id="comment" name="body" rows="1" columns="10"></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
         {% for comment in post.comments.all %}
             <div class="caja_comentarios">
                 <div class="comentario_author">
