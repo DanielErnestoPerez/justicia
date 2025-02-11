@@ -39,13 +39,6 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="anadir_comentarios">
-                            <form action="{% url 'reply_sent' reply.id %}" method="post">
-                                {% csrf_token %}
-                                {{ reply_create_form }}
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-                            </form>
-                        </div>
                     {% endfor %}
                 </div>
             </div>
