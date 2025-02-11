@@ -3,9 +3,9 @@
 {% block content %}
 <div class="create_post_externo">
     <div class="profile">
-        <img src="{{ user.profile.avatar }}" alt="">
-        <a href="#">{{ user.profile.name }}</a>
-        <a href="#">{{ profile.user.username }}</a>
+        <img src="{{ profile.avatar }}" alt="">
+        <a href="#">{{ profile.name }}</a>
+        <a href="#">@{{ profile.user.username }}</a>
         
         {% if profile.location %}
             <a href="#"><i class="fa-solid fa-location-dot"></i> {{profile.location}}</a>
@@ -35,7 +35,7 @@
     <div class="container">
     <div class="row">
         {% for post in posts  %}
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="publicaciones_titulo">
                         <p>{{post.titulo}}</p>
@@ -49,9 +49,9 @@
                         {% endif %}
                     </div>
                     <article>
-                        <img class="card-img-top" src="{{post.imagen_fondo.url}}" alt="">
-                        <a href="#">
-                            <img class="card-img-top" src="{{post.imagen_portada.url}}" alt="">
+                        <img class="card-img-top" src="{{ post.imagen_fondo.url }}" alt="">
+                        <a href="{% url 'read_post' post.id %}">
+                            <img class="card-img-top" src="{{ post.imagen_portada.url }}" alt="">
                         </a>
                     </article>
                 
