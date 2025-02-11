@@ -25,14 +25,15 @@ def redes_sociales(request):
 
 @login_required
 def create_post(request):
+    create_post = CreatePost()
     if request.method == 'POST':
         create_post = CreatePost(request.POST, request.FILES)
         if create_post.is_valid():
+            post = create_post.save(commit=False)
+            post.author = request.user
+            post.save()
             messages.success(request, 'Post created successfully!')
-            create_post.save()
             return redirect('publicaciones')
-    else:
-        create_post = CreatePost()
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
 
 def read_post(request, post_id):
