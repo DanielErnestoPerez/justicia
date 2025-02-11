@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Reply
 
 class CreatePost(forms.ModelForm):
     class Meta:
@@ -72,6 +72,19 @@ class CommentCreateForm(forms.ModelForm):
             'body': forms.TextInput(attrs={
                 'placeholder': 'Add a comment',
                 'class': 'custom_comment_input',
+                }),
+        }
+        labels = {
+            'body': '',
+        }
+class ReplyCreateForm(forms.ModelForm):
+    class Meta:
+        model = Reply
+        fields = ['body']
+        widgets = {
+            'body': forms.TextInput(attrs={
+                'placeholder': 'Add a reply',
+                'class': 'custom_reply_input',
                 }),
         }
         labels = {

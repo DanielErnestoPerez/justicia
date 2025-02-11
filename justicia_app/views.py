@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Tag, Comment
-from .forms import CreatePost, EditPost, CommentCreateForm
+from .models import Post, Tag, Comment, Reply
+from .forms import CreatePost, EditPost, CommentCreateForm, ReplyCreateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -40,10 +40,12 @@ def read_post(request, post_id):
     post_to_read = get_object_or_404(Post, id=post_id)
     categories = Tag.objects.all()
     comment_create_form= CommentCreateForm()
+    reply_create_form= ReplyCreateForm()
     context = {
         'post': post_to_read, 
         'categories': categories,
         'comment_create_form': comment_create_form,
+        'reply_create_form': reply_create_form
         }
     return render(request, 'justicia_app/read_post.html', context )
 
@@ -91,3 +93,25 @@ def comment_delete(request, post_id):
         comment_to_delete.delete()
         return redirect('read_post', comment_to_delete.parent_post.id)
     return render(request, 'justicia_app/delete_comment.html', {'comment': comment_to_delete})
+
+@login_required
+def reply_sent(request, post_id):
+    comment = get_object_or_404(Comment, id=post_id)
+    if request.method == 'POST':
+        form = ReplyCreateForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.author = request.user
+            reply.parent_comment = comment
+            reply.save()
+    return redirect('read_post', comment.parent_post.id)
+
+
+@login_required
+def reply_delete(request, post_id):
+    reply = get_object_or_404(Reply, id=post_id, author=request.user)
+    if request.method == 'POST':
+        messages.success(request, 'Reply deleted successfully!')
+        reply.delete()
+        return redirect('read_post', reply.parent_comment.parent_post.id)
+    return render(request, 'justicia_app/delete_reply.html', {'reply': reply})
