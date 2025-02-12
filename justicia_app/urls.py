@@ -13,6 +13,7 @@ urlpatterns = [
     path('read_post/<post_id>/', views.read_post, name='read_post'),
     path('read_post/<post_id>/like/', views.like_post, name='like_post'),
     path('comment_post/<post_id>/like/', views.like_comment, name='like_comment'),
+    path('reply_post/<post_id>/like/', views.like_reply, name='like_reply'),
     path('edit_post/<post_id>/', views.edit_post, name='edit_post'),
     path('delete_post/<post_id>/', views.delete_post, name='delete_post'),
     path('comment_sent/<post_id>/', views.comment_sent, name='comment_sent'),

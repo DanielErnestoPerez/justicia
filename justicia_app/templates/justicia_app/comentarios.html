@@ -1,52 +1,23 @@
 {% load static %}
-
-<div class="comentarios">
-    {% if post.comments.count %}
-        <a href="{% url 'read_post' post.id %}">
-            Comentarios: {{ post.comments.count }}
+<div class="caja_comentarios">
+    <div class="comentario_author">
+        <img src="{{ comment.author.profile.avatar }}" alt="">
+        <a href="{% url 'user_profile' comment.author.username %}">
+            {{comment.author.profile.name}}
+            @{{comment.author.username}}
         </a>
-    {% else %}
-        {% if user.is_authenticated %}
-            Add a comment
-        {% endif %}
-    {% endif %}
-</div>
-<div class="anadir_comentarios">
-    <form action="{% url 'comment_sent' post.id %}" method="post">
-        {% csrf_token %}
-        {{ comment_create_form }}
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-</div>
-
-{% for comment in post.comments.all %}
-    <div class="caja_comentarios">
-        <div class="comentario_author">
-            {% if post.author %}
-                <img src="{{ comment.author.profile.avatar }}" alt="">
-                <a href="{% url 'user_profile' comment.author.username %}">
-                    {{comment.author.profile.name}}
-                    @{{comment.author.username}}
-                </a>
-            {% else %}
-                <p><img src="{% static 'img/default_user.png' %}" alt="">No user</p>
+    </div>
+    <div class="comentario_editar">
+        <div>
+            <p class="card-text" id="comment-text">{{comment.body}}</p>
+            <a href="javascript:void(0)" id="toggle-text" class="toggle-text" style="display: none;">Ver más</a>
+        </div>
+        <div class="comentario_likes">
+            {% include './likes_comentarios.html' %} 
+            {% if user.is_authenticated and comment.author == user %}
+            <a href="{% url 'comment_delete' comment.id %}"><i class="fa-solid fa-trash"></i></a>
             {% endif %}
         </div>
-        <div class="comentario_editar">
-            <div>
-                <p class="card-text" id="comment-text">{{comment.body}}</p>
-                <a href="javascript:void(0)" id="toggle-text" class="toggle-text" style="display: none;">Ver más</a>
-            </div>
-            <div class="comentario_likes">
-                {% include './likes_comentarios.html' %}
-                <a href="#"><i class="fa-solid fa-heart"></i></a>   
-                {% if user.is_authenticated and comment.author == user %}
-                <a href="{% url 'comment_delete' comment.id %}"><i class="fa-solid fa-trash"></i></a>
-                {% endif %}
-            </div>
-        </div>
-        {% include './replies.html' %}
     </div>
-{% endfor %}
-
-<script src="{% static 'js/expandir_texto.js' %}"></script>
+    {% include './replies.html' %}
+</div>

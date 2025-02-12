@@ -1,9 +1,9 @@
 <div class="likes_comentarios">
-    {% if user.is_authenticated and user != comment.author %}
-        <a hx-get="{% url 'like_comment' comment.id %}" 
+    {% if user.is_authenticated and user != reply.author %}
+        <a hx-get="{% url 'like_reply' reply.id %}" 
             hx-target="closest div"
             hx-swap="outerHTML">
-            {% if user in comment.likes.all %}
+            {% if user in reply.likes.all %}
                 <i class="fa-solid fa-heart" style="color: red;"></i>
             {% else %}
                 <i class="fa-solid fa-heart"></i>
@@ -12,5 +12,5 @@
     {% else %}
         <i class="fa-solid fa-heart" style="color: blue; margin-top:.2rem;"></i>
     {% endif %}
-    {{ comment.likes.count }}
+    {{ reply.likes.count }}
 </div>

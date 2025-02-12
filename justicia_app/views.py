@@ -83,7 +83,7 @@ def comment_sent(request, post_id):
             comment.author = request.user
             comment.parent_post = post
             comment.save()
-    return redirect('read_post', post.id)
+    return render(request, 'justicia_app/add_comment.html', {'comment': comment, 'post': post})
 
 @login_required
 def comment_delete(request, post_id):
@@ -140,3 +140,8 @@ def like_post(request, post):
 @like_toggle(Comment)
 def like_comment(request, post):
     return render(request, 'justicia_app/likes_comentarios.html', {'comment': post})
+
+@login_required
+@like_toggle(Reply)
+def like_reply(request, post):
+    return render(request, 'justicia_app/likes_replies.html', {'reply': post})

@@ -34,11 +34,42 @@
                 <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
             {% endif %}
         </div>
-        {% include './comentarios.html' %}
+
+        <!--  Comentarios -->
+        <div class="comentarios">
+            {% if post.comments.count %}
+                <a href="{% url 'read_post' post.id %}">
+                    Comentarios: 
+                    <span id="comments_count_{{post.id}}">
+                        {{ post.comments.count }}
+                    </span>
+                </a>
+            {% else %}
+                {% if user.is_authenticated %}
+                    Add a comment
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="anadir_comentarios">
+            <form hx-post="{% url 'comment_sent' post.id %}"
+                hx-target="#tab-contents"
+                hx-swap="afterbegin"
+                _="on htmx:afterRequest reset() me">
+                    {% csrf_token %}
+                    {{ comment_create_form }}
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+        <div id="tab-contents">
+            {% for comment in post.comments.all %}
+                {% include 'justicia_app/comentarios.html' %}
+            {% endfor %}
+        </div>
     </div>
     <div class="contenido_publicaciones">
         {{post.contenido}}
     </div>
 </div>
-
 {% endblock  %}
+
+<script src="{% static 'js/expandir_texto.js' %}"></script>
