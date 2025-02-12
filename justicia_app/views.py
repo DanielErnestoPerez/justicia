@@ -76,6 +76,7 @@ def delete_post(request, post_id):
 @login_required
 def comment_sent(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    reply_form = ReplyCreateForm()
     if request.method == 'POST':
         form = CommentCreateForm(request.POST)
         if form.is_valid():
@@ -83,7 +84,11 @@ def comment_sent(request, post_id):
             comment.author = request.user
             comment.parent_post = post
             comment.save()
-    return render(request, 'justicia_app/add_comment.html', {'comment': comment, 'post': post})
+    context = {
+        'post': post,
+        'comment': comment,
+        'reply_form': reply_form}
+    return render(request, 'justicia_app/snippets/add_comment.html', context)
 
 @login_required
 def comment_delete(request, post_id):
@@ -97,6 +102,7 @@ def comment_delete(request, post_id):
 @login_required
 def reply_sent(request, post_id):
     comment = get_object_or_404(Comment, id=post_id)
+    reply_form = ReplyCreateForm()
     if request.method == 'POST':
         form = ReplyCreateForm(request.POST)
         if form.is_valid():
@@ -104,7 +110,11 @@ def reply_sent(request, post_id):
             reply.author = request.user
             reply.parent_comment = comment
             reply.save()
-    return redirect('read_post', comment.parent_post.id)
+    context = {
+        'reply': reply,
+        'comment': comment,
+        'reply_form': reply_form}
+    return render(request, 'justicia_app/snippets/add_reply.html', context)
 
 
 @login_required

@@ -4,13 +4,17 @@
     <ul class="accordion_comentarios">
         <li>
             <div class="anadir_comentarios">
-                <form action="{% url 'reply_sent' comment.id %}" method="post">
-                    {% csrf_token %}
-                    {{ reply_create_form }}
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                <form hx-post="{% url 'reply_sent' comment.id %}"
+                    hx-target="this"
+                    hx-swap="outerHTML">
+                        {% csrf_token %}
+                        {{ reply_create_form }}
+                        <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
-            <label for="{{comment.id}}">Replies: {{comment.replies.count}}<span> &#x3e;</span></label>
+            <label for="{{comment.id}}" id="replies_count_{{comment.id}}">
+                Replies: {{comment.replies.count}}<span> &#x3e;</span>
+            </label>
             <input type="checkbox" name="accordion_comentarios" id="{{comment.id}}">
             <div class="contenido_accordion_comentarios">
                 <div class="replies_scroll">
