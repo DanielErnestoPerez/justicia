@@ -11,6 +11,7 @@ class Post(models.Model):
     imagen_fondo = CloudinaryField('image',folder= 'backgrounds', null=True)
     imagen_portada = CloudinaryField('image', folder= 'portadas', null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
+    likes = models.ManyToManyField(User, related_name="liked_posts", through='LikedPost')
     tags = models.ManyToManyField('Tag')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
@@ -40,6 +41,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='comments')
     parent_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     body = models.CharField()
+    likes = models.ManyToManyField(User, related_name='liked_comments', through='LikedComment')
     created = models.DateTimeField(auto_now_add=True)
     id = models.CharField(max_length=100, default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
@@ -51,7 +53,7 @@ class Comment(models.Model):
     def __str__(self):
         try:
             return f'{self.author.username}:{self.body[:30]}'
-        except:
+        except AttributeError:
             return f'no author :{self.body[:30]}'
 
 class Reply(models.Model):
@@ -69,5 +71,30 @@ class Reply(models.Model):
     def __str__(self):
         try:
             return f'{self.author.username}:{self.body[:30]}'
-        except:
+        except AttributeError:
             return f'no author :{self.body[:30]}'
+
+class LikedPost(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'{self.user.username} : {self.post.titulo}'
+    
+    class Meta:
+        verbose_name = 'LikedPost'
+        verbose_name_plural = 'LikedPosts'
+
+
+class LikedComment(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'{self.user.username} : {self.comment.body[:30]}'
+    
+    class Meta:
+        verbose_name = 'LikedComment'
+        verbose_name_plural = 'LikedComments'

@@ -115,3 +115,28 @@ def reply_delete(request, post_id):
         reply.delete()
         return redirect('read_post', reply.parent_comment.parent_post.id)
     return render(request, 'justicia_app/delete_reply.html', {'reply': reply})
+
+def like_toggle(model):
+    def inner_func(func):
+        def wrapper(request, *args, **kwargs):
+            post = get_object_or_404(model, id=kwargs.get('post_id'))
+            user_exist = post.likes.filter(username = request.user.username).exists()
+            if post.author != request.user:
+                if user_exist:
+                    post.likes.remove(request.user)
+                else:
+                    post.likes.add(request.user)
+            return func(request, post)
+        return wrapper
+    return inner_func
+
+@login_required
+@like_toggle(Post)
+def like_post(request, post):
+    return render(request, 'justicia_app/likes.html', {'post': post})
+
+
+@login_required
+@like_toggle(Comment)
+def like_comment(request, post):
+    return render(request, 'justicia_app/likes_comentarios.html', {'comment': post})
