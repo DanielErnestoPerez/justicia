@@ -76,7 +76,7 @@ def delete_post(request, post_id):
 @login_required
 def comment_sent(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    reply_form = ReplyCreateForm()
+    reply_create_form = ReplyCreateForm()
     if request.method == 'POST':
         form = CommentCreateForm(request.POST)
         if form.is_valid():
@@ -87,7 +87,7 @@ def comment_sent(request, post_id):
     context = {
         'post': post,
         'comment': comment,
-        'reply_form': reply_form}
+        'reply_create_form': reply_create_form}
     return render(request, 'justicia_app/snippets/add_comment.html', context)
 
 @login_required
@@ -102,7 +102,7 @@ def comment_delete(request, post_id):
 @login_required
 def reply_sent(request, post_id):
     comment = get_object_or_404(Comment, id=post_id)
-    reply_form = ReplyCreateForm()
+    reply_create_form = ReplyCreateForm()
     if request.method == 'POST':
         form = ReplyCreateForm(request.POST)
         if form.is_valid():
@@ -113,7 +113,7 @@ def reply_sent(request, post_id):
     context = {
         'reply': reply,
         'comment': comment,
-        'reply_form': reply_form}
+        'reply_create_form': reply_create_form}
     return render(request, 'justicia_app/snippets/add_reply.html', context)
 
 
@@ -143,15 +143,15 @@ def like_toggle(model):
 @login_required
 @like_toggle(Post)
 def like_post(request, post):
-    return render(request, 'justicia_app/likes.html', {'post': post})
+    return render(request, 'justicia_app/snippets/likes.html', {'post': post})
 
 
 @login_required
 @like_toggle(Comment)
 def like_comment(request, post):
-    return render(request, 'justicia_app/likes_comentarios.html', {'comment': post})
+    return render(request, 'justicia_app/snippets/likes_comentarios.html', {'comment': post})
 
 @login_required
 @like_toggle(Reply)
 def like_reply(request, post):
-    return render(request, 'justicia_app/likes_replies.html', {'reply': post})
+    return render(request, 'justicia_app/snippets/likes_replies.html', {'reply': post})

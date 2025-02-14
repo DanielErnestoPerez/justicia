@@ -1,7 +1,7 @@
 <fade-in
     _="on load transition my margin-top to 0 over 0.2 seconds then
         transition my opacity to 1 over 0.4 seconds">
-    {% include '../comentarios.html' %}
+    {% include './comentarios.html' %}
 </fade-in>
 
 <span hx-swap-oob="true" id="comments_count_{{post.id}}">{{ post.comments.count }}</span>
