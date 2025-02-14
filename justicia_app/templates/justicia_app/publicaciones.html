@@ -35,15 +35,9 @@
                     </div>
                     <div class="sub-menu">
                         <div>
-                            {% if post.comments.count %}
-                                <a href="{% url 'read_post' post.id %}">
-                                    Comentarios: {{ post.comments.count }}
-                                </a>
-                            {% else %}
-                                {% if user.is_authenticated %}
-                                    Add a comment
-                                {% endif %}
-                            {% endif %}
+                            <a href="{% url 'read_post' post.id %}">
+                                Comentarios: {{ post.comments.count }}
+                            </a>
                         </div>
                         <div class="editar_publicacion">
                             {% include './snippets/likes.html' %}
