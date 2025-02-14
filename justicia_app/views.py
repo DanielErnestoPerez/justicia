@@ -37,6 +37,13 @@ def create_post(request):
             post = create_post.save(commit=False)
             post.author = request.user
             post.save()
+
+            # Aquí agregas los tags seleccionados al post
+            tags = request.POST.getlist('tags')  # Obtener los tags seleccionados
+            post.tags.set(tags)  # Asignar los tags al post
+            post.save()
+
+
             messages.success(request, 'Post created successfully!')
             return redirect('publicaciones')
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
