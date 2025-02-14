@@ -3,6 +3,7 @@ from .models import Post, Tag, Comment, Reply
 from .forms import CreatePost, EditPost, CommentCreateForm, ReplyCreateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 # Create your views here.
 
 def home(request):
@@ -16,8 +17,12 @@ def publicaciones(request, tag=None):
         posts = Post.objects.all()
 
     categories = Tag.objects.all()
-    return render(request, 'justicia_app/publicaciones.html', 
-                {'posts': posts, 'categories': categories, 'tag': tag})
+    context = {
+        'posts': posts, 
+        'categories': categories,
+        'tag': tag
+    }
+    return render(request, 'justicia_app/publicaciones.html', context)
 
 def redes_sociales(request):
     return render(request, 'justicia_app/redes_sociales.html')
@@ -37,12 +42,24 @@ def create_post(request):
     return render(request, 'justicia_app/create_post.html', {'create_post': create_post})
 
 def read_post(request, post_id):
-    post_to_read = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post, id=post_id)
     categories = Tag.objects.all()
     comment_create_form= CommentCreateForm()
     reply_create_form= ReplyCreateForm()
+    if request.htmx:
+        if 'top' in request.GET:
+            comments = post.comments.annotate(
+                num_likes=Count('likes')
+                ).filter(num_likes__gt=0).order_by('-num_likes')
+        else:
+            comments = post.comments.all()
+        context2= {
+            'comments': comments,
+            'reply_create_form': reply_create_form}
+        return render(request, 'justicia_app/snippets/loop_postpage_comments.html', context2)
+    
     context = {
-        'post': post_to_read, 
+        'post': post, 
         'categories': categories,
         'comment_create_form': comment_create_form,
         'reply_create_form': reply_create_form
@@ -52,26 +69,26 @@ def read_post(request, post_id):
 
 @login_required
 def edit_post(request, post_id):
-    post_to_edit = get_object_or_404(Post, id=post_id, author=request.user)
-    edit_post = EditPost(instance=post_to_edit)
+    post = get_object_or_404(Post, id=post_id, author=request.user)
+    edit_post = EditPost(instance=post)
     if request.method == 'POST':
-        edit_post = EditPost(request.POST, instance=post_to_edit)
+        edit_post = EditPost(request.POST, instance=post)
         if edit_post.is_valid():
             messages.success(request, 'Post updated successfully!')
             edit_post.save()
             return redirect('publicaciones')
         else:
             print('Error updating', edit_post.errors)
-    return render(request, 'justicia_app/edit_post.html', {'post': post_to_edit, 'edit_post': edit_post})
+    return render(request, 'justicia_app/edit_post.html', {'post': post, 'edit_post': edit_post})
 
 @login_required
 def delete_post(request, post_id):
-    post_to_delete = get_object_or_404(Post, id=post_id, author=request.user)
+    post = get_object_or_404(Post, id=post_id, author=request.user)
     if request.method == 'POST':
         messages.success(request, 'Post deleted successfully!')
-        post_to_delete.delete()
+        post.delete()
         return redirect('publicaciones')
-    return render(request, 'justicia_app/delete_post.html', {'post': post_to_delete})
+    return render(request, 'justicia_app/delete_post.html', {'post': post})
 
 @login_required
 def comment_sent(request, post_id):
@@ -92,12 +109,12 @@ def comment_sent(request, post_id):
 
 @login_required
 def comment_delete(request, post_id):
-    comment_to_delete = get_object_or_404(Comment, id=post_id, author=request.user)
+    comment = get_object_or_404(Comment, id=post_id, author=request.user)
     if request.method == 'POST':
         messages.success(request, 'Comment deleted successfully!')
-        comment_to_delete.delete()
-        return redirect('read_post', comment_to_delete.parent_post.id)
-    return render(request, 'justicia_app/delete_comment.html', {'comment': comment_to_delete})
+        comment.delete()
+        return redirect('read_post', comment.parent_post.id)
+    return render(request, 'justicia_app/delete_comment.html', {'comment': comment})
 
 @login_required
 def reply_sent(request, post_id):

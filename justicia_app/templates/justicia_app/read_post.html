@@ -32,6 +32,19 @@
             <ul class="accordion_post">
                 <li>
                     {% if post.comments.count %}
+                        <div class="tabs_comentarios">
+                            <div id="tabs" hx-target="#tab-contents" hx-swap="innerHTML"
+                            _='on htmx:afterOnLoad take .selected for event.target'>
+                                <button hx-get="{% url 'read_post' post.id %}" 
+                                    class='tab selected' onclick="setSelectedTab(event)">
+                                    Newest First
+                                </button>
+                                <button hx-get="{% url 'read_post' post.id %}?top" 
+                                    class='tab' onclick="setSelectedTab(event)">
+                                    Top Comments
+                                </button>
+                            </div>
+                        </div>
                         <label for="{{post.id}}" id="etiqueta_comentario_label">
                             Comentarios: 
                             <span id="comments_count_{{post.id}}">
@@ -44,7 +57,6 @@
                             Add a comment
                         {% endif %}
                     {% endif %}
-        
                     <div class="contenido_accordion_post">
                         <div class="comentarios_scroll">
                             <div class="anadir_comentarios">
@@ -84,3 +96,4 @@
 {% endblock  %}
 
 <script src="{% static 'js/expandir_texto.js' %}"></script>
+<script src="{% static 'js/seleccionar_tab.js' %}"></script>
