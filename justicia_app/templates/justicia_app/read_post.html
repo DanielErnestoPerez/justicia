@@ -31,32 +31,26 @@
             <!--  Comentarios -->
             <ul class="accordion_post">
                 <li>
-                    {% if post.comments.count %}
-                        <div class="tabs_comentarios">
-                            <div id="tabs" hx-target="#tab-contents" hx-swap="innerHTML"
-                            _='on htmx:afterOnLoad take .selected for event.target'>
-                                <button hx-get="{% url 'read_post' post.id %}" 
-                                    class='tab selected' onclick="setSelectedTab(event)">
-                                    Newest First
-                                </button>
-                                <button hx-get="{% url 'read_post' post.id %}?top" 
-                                    class='tab' onclick="setSelectedTab(event)">
-                                    Top Comments
-                                </button>
-                            </div>
+                    <div class="tabs_comentarios">
+                        <div id="tabs" hx-target="#tab-contents" hx-swap="innerHTML"
+                        _='on htmx:afterOnLoad take .selected for event.target'>
+                            <button hx-get="{% url 'read_post' post.id %}" 
+                                class='tab selected' onclick="setSelectedTab(event)">
+                                Newest First
+                            </button>
+                            <button hx-get="{% url 'read_post' post.id %}?top" 
+                                class='tab' onclick="setSelectedTab(event)">
+                                Top Comments
+                            </button>
                         </div>
-                        <label for="{{post.id}}" id="etiqueta_comentario_label">
-                            Comentarios: 
-                            <span id="comments_count_{{post.id}}">
-                                {{ post.comments.count }}
-                            </span>&#x3e;
-                        </label>
-                        <input type="checkbox" name="accordion_post" id="{{post.id}}">
-                    {% else %}
-                        {% if user.is_authenticated %}
-                            Add a comment
-                        {% endif %}
-                    {% endif %}
+                    </div>
+                    <label for="{{post.id}}" id="etiqueta_comentario_label">
+                        Comentarios: 
+                        <span id="comments_count_{{post.id}}">
+                            {{ post.comments.count }}
+                        </span>&#x3e;
+                    </label>
+                    <input type="checkbox" name="accordion_post" id="{{post.id}}">
                     <div class="contenido_accordion_post">
                         <div class="comentarios_scroll">
                             <div class="anadir_comentarios">
