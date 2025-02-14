@@ -11,14 +11,14 @@ def home(request):
 
 def publicaciones(request, tag=None):
     if tag:
-        post = Post.objects.filter(tags__slug=tag)
+        posts = Post.objects.filter(tags__slug=tag)
         tag = Tag.objects.get(slug=tag)
     else:
-        post = Post.objects.all()
+        posts = Post.objects.all()
 
     categories = Tag.objects.all()
     context = {
-        'post': post, 
+        'posts': posts, 
         'categories': categories,
         'tag': tag
     }
