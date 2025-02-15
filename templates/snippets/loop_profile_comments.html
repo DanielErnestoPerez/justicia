@@ -1,0 +1,6 @@
+{% load static %}
+<fade-in _="on load transition my opacity to 1 over 0.2 seconds">
+    {% for comment in comments  %}
+        {% include './comentarios.html' %}
+    {% endfor %}
+</fade-in>

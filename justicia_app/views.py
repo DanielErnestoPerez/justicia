@@ -63,7 +63,7 @@ def read_post(request, post_id):
         context2= {
             'comments': comments,
             'reply_create_form': reply_create_form}
-        return render(request, 'justicia_app/snippets/loop_postpage_comments.html', context2)
+        return render(request, 'snippets/loop_postpage_comments.html', context2)
     
     context = {
         'post': post, 
@@ -112,7 +112,7 @@ def comment_sent(request, post_id):
         'post': post,
         'comment': comment,
         'reply_create_form': reply_create_form}
-    return render(request, 'justicia_app/snippets/add_comment.html', context)
+    return render(request, 'snippets/add_comment.html', context)
 
 @login_required
 def comment_delete(request, post_id):
@@ -138,7 +138,7 @@ def reply_sent(request, post_id):
         'reply': reply,
         'comment': comment,
         'reply_create_form': reply_create_form}
-    return render(request, 'justicia_app/snippets/add_reply.html', context)
+    return render(request, 'snippets/add_reply.html', context)
 
 
 @login_required
@@ -167,15 +167,15 @@ def like_toggle(model):
 @login_required
 @like_toggle(Post)
 def like_post(request, post):
-    return render(request, 'justicia_app/snippets/likes.html', {'post': post})
+    return render(request, 'snippets/likes.html', {'post': post})
 
 
 @login_required
 @like_toggle(Comment)
 def like_comment(request, post):
-    return render(request, 'justicia_app/snippets/likes_comentarios.html', {'comment': post})
+    return render(request, 'snippets/likes_comentarios.html', {'comment': post})
 
 @login_required
 @like_toggle(Reply)
 def like_reply(request, post):
-    return render(request, 'justicia_app/snippets/likes_replies.html', {'reply': post})
+    return render(request, 'snippets/likes_replies.html', {'reply': post})

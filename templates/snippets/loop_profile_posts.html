@@ -1,57 +1,5 @@
-{% extends 'justicia_app/base.html' %}
 {% load static %}
-{% block content %}
-<div class="create_post_externo">
-    <div class="profile">
-        <img src="{{ profile.avatar }}" alt="">
-        <a href="#">{{ profile.name }}</a>
-        <a href="#">@{{ profile.user.username }}</a>
-        
-        {% if profile.location %}
-            <a href="#"><i class="fa-solid fa-location-dot"></i> {{profile.location}}</a>
-        {% else %}
-            No location selected
-        {% endif %}
-        
-        {% if profile.bio %}
-            <p>{{profile.bio}}</p>
-        {% else %}
-            No bio specified
-        {% endif %}
-    </div>
-
-    <div class="interacciones">
-        <ul>
-            <li>
-                <div class="tabs_comentarios">
-                    <div id="tabs" hx-target="#tab-contents" hx-swap="innerHTML"
-                    _='on htmx:afterOnLoad take .selected for event.target'>
-                        <button 
-                            hx-get="{% url 'user_profile' profile.user.username %}" 
-                            class='tab selected' onclick="setSelectedTab(event)">
-                                Recently
-                        </button>
-                        <button 
-                            hx-get="{% url 'user_profile' profile.user.username %}?top_posts" 
-                            class='tab' onclick="setSelectedTab(event)">
-                                Top Posts
-                        </button>
-                        <button 
-                            hx-get="{% url 'user_profile' profile.user.username %}?top_comments" 
-                            class='tab' onclick="setSelectedTab(event)">
-                                Top Comments
-                        </button>
-                        <button 
-                            hx-get="{% url 'user_profile' profile.user.username %}?liked_posts" 
-                            class='tab' onclick="setSelectedTab(event)">
-                                Liked Posts
-                        </button>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-
+<fade-in _="on load transition my opacity to 1 over 0.2 seconds">
     <div class="container">
     <div class="row" id='tab-contents'>
         {% for post in posts  %}
@@ -107,7 +55,4 @@
         {% endfor %}
     </div>
     </div>
-</div>
-{% endblock  %}
-
-<script src="{% static 'js/seleccionar_tab.js' %}"></script>
+</fade-in>

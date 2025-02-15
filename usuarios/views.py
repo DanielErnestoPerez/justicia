@@ -7,18 +7,59 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.db.models import Count
+from justicia_app .forms import CommentCreateForm, ReplyCreateForm
 # Create your views here.
 
 def profile(request, username=None):
-    posts = Post.objects.all()
+    # Definir la constante
+    posts_snippet = 'snippets/loop_profile_posts.html'
+    comments_snippet = 'snippets/loop_profile_comments.html'
+
     if username:
         profile = get_object_or_404(User, username=username).profile
     else:
         try:
             profile = request.user.profile
-        except:
+        except AttributeError:
             raise Http404()
-    return render(request, 'usuarios/profile.html', {'posts': posts, 'profile': profile})
+    
+    posts = profile.user.posts.all()
+
+    if request.htmx:
+        if 'top_posts' in request.GET:
+            posts = profile.user.posts.annotate(
+                num_likes=Count('likes')
+            ).filter(num_likes__gt=0).order_by('-num_likes')
+            return render(request, posts_snippet, {'posts': posts})
+        
+        elif 'top_comments' in request.GET:
+            comments = profile.user.comments.annotate(
+                num_likes=Count('likes')
+            ).filter(num_likes__gt=0).order_by('-num_likes')
+            
+            comment_create_form = CommentCreateForm()
+            reply_create_form = ReplyCreateForm()
+            context2 = {
+                'comments': comments,
+                'comment_create_form': comment_create_form,
+                'reply_create_form': reply_create_form
+            }
+            return render(request, comments_snippet, context2)
+        
+        elif 'liked_posts' in request.GET:
+            posts = profile.user.liked_posts.order_by('-likedpost__created')
+            return render(request, posts_snippet, {'posts': posts})
+        
+        else:
+            return render(request, posts_snippet, {'posts': posts})
+
+    context = {
+        'posts': posts,
+        'profile': profile,
+    }
+    return render(request, 'usuarios/profile.html', context)
+
 
 @login_required
 def profile_edit(request):
