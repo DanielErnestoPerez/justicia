@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="comentario_replies">
+    <ul class="accordion_comentarios">
+        <li class="accordion_para_replies">
+            <div class="anadir_comentarios">
+                <form hx-post="{% url 'reply_sent' comment.id %}"
+                    hx-target="this"
+                    hx-swap="outerHTML">
+                        {% csrf_token %}
+                        {{ reply_create_form }}
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+            <label for="{{comment.id}}" id="replies_count_{{comment.id}}">
+                Replies: {{comment.replies.count}}<span> &#x3e;</span>
+            </label>
+            <input type="checkbox" name="accordion_comentarios" id="{{comment.id}}">
+            <div class="contenido_accordion_comentarios">
+                <div class="replies_scroll">
+                    {% for reply in comment.replies.all %}
+                        <div class="comentario_author"> 
+                            {% if reply.author %}
+                                <img src="{{ reply.author.profile.avatar }}" alt="">
+                                <a href="{% url 'user_profile' reply.author.username %}">
+                                    {{reply.author.profile.name}}
+                                    @{{reply.author.username}}
+                                </a>
+                            {% else %}
+                                <p><img src="{% static 'img/default_user.png' %}" alt="">No user</p>
+                            {% endif %}
+                        </div>
+                        <div class="comentario_editar">
+                            <div>
+                                <p class="card-text" id="comment-text">{{reply.body}}</p>
+                                <a href="javascript:void(0)" class="toggle-text" style="display: none;">Ver más</a>
+                            </div>
+                            <div class="comentario_likes">
+                                {% include './likes_replies.html' %}
+                                {% if user.is_authenticated and reply.author == user or comment.author == user %}
+                                    <a href="{% url 'reply_delete' reply.id %}"><i class="fa-solid fa-trash"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
