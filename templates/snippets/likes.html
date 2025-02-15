@@ -1,0 +1,16 @@
+<div>
+    {% if user.is_authenticated and user != post.author %}
+        <a hx-get="{% url 'like_post' post.id %}" 
+            hx-target="closest div"
+            hx-swap="outerHTML">
+            {% if user in post.likes.all %}
+                <i class="fa-solid fa-heart" style="color: red;"></i>
+            {% else %}
+                <i class="fa-solid fa-heart"></i>
+            {% endif %}
+        </a>
+    {% else %}
+        <i class="fa-solid fa-heart" style="color: blue; margin-top:.2rem;"></i>
+    {% endif %}
+    {{ post.likes.count }}
+</div>
