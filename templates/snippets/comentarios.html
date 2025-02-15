@@ -1,0 +1,23 @@
+{% load static %}
+<div class="caja_comentarios">
+    <div class="comentario_author">
+        <img src="{{ comment.author.profile.avatar }}" alt="">
+        <a href="{% url 'user_profile' comment.author.username %}">
+            {{comment.author.profile.name}}
+            @{{comment.author.username}}
+        </a>
+    </div>
+    <div class="comentario_editar">
+        <div>
+            <p class="card-text" id="comment-text">{{comment.body}}</p>
+            <a href="javascript:void(0)" id="toggle-text" class="toggle-text" style="display: none;">Ver más</a>
+        </div>
+        <div class="comentario_likes">
+            {% include './likes_comentarios.html' %} 
+            {% if user.is_authenticated and comment.author == user %}
+            <a href="{% url 'comment_delete' comment.id %}"><i class="fa-solid fa-trash"></i></a>
+            {% endif %}
+        </div>
+    </div>
+    {% include './replies.html' %}
+</div>
