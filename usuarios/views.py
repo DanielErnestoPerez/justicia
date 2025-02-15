@@ -12,10 +12,6 @@ from justicia_app .forms import CommentCreateForm, ReplyCreateForm
 # Create your views here.
 
 def profile(request, username=None):
-    # Definir la constante
-    posts_snippet = 'snippets/loop_profile_posts.html'
-    comments_snippet = 'snippets/loop_profile_comments.html'
-
     if username:
         profile = get_object_or_404(User, username=username).profile
     else:
@@ -31,7 +27,6 @@ def profile(request, username=None):
             posts = profile.user.posts.annotate(
                 num_likes=Count('likes')
             ).filter(num_likes__gt=0).order_by('-num_likes')
-            return render(request, posts_snippet, {'posts': posts})
         
         elif 'top_comments' in request.GET:
             comments = profile.user.comments.annotate(
@@ -45,14 +40,12 @@ def profile(request, username=None):
                 'comment_create_form': comment_create_form,
                 'reply_create_form': reply_create_form
             }
-            return render(request, comments_snippet, context2)
+            return render(request, 'snippets/loop_profile_comments.html', context2)
         
         elif 'liked_posts' in request.GET:
             posts = profile.user.liked_posts.order_by('-likedpost__created')
-            return render(request, posts_snippet, {'posts': posts})
         
-        else:
-            return render(request, posts_snippet, {'posts': posts})
+        return render(request, 'snippets/loop_profile_posts.html', {'posts': posts})
 
     context = {
         'posts': posts,
