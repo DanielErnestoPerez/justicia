@@ -18,22 +18,42 @@
         {% else %}
             No bio specified
         {% endif %}
-            
     </div>
 
     <div class="interacciones">
         <ul>
             <li>
-                <a href="#">Latest</a>
-                <a href="#">Top Posts</a>
-                <a href="#">Top Comments</a>
-                <a href="#">Liked Posts</a>
+                <div class="tabs_comentarios">
+                    <div id="tabs" hx-target="#tab-contents" hx-swap="innerHTML"
+                    _='on htmx:afterOnLoad take .selected for event.target'>
+                        <button 
+                            hx-get="{% url 'user_profile' profile.user.username %}" 
+                            class='tab selected' onclick="setSelectedTab(event)">
+                                Newest First
+                        </button>
+                        <button 
+                            hx-get="{% url 'user_profile' profile.user.username %}?top_posts" 
+                            class='tab' onclick="setSelectedTab(event)">
+                                Top Posts
+                        </button>
+                        <button 
+                            hx-get="{% url 'user_profile' profile.user.username %}?top_comments" 
+                            class='tab' onclick="setSelectedTab(event)">
+                                Top Comments
+                        </button>
+                        <button 
+                            hx-get="{% url 'user_profile' profile.user.username %}?liked_posts" 
+                            class='tab' onclick="setSelectedTab(event)">
+                                Liked Posts
+                        </button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
 
     <div class="container">
-    <div class="row">
+    <div class="row" id='tab-contents'>
         {% for post in posts  %}
             <div class="col-md-4">
                 <div class="card">
@@ -42,7 +62,7 @@
                         {% if post.author %}
                             <a href="{% url 'user_profile' post.author.username %}" style="display:flex;">
                                 <img src="{{ post.author.profile.avatar }}" alt="">
-                                <p>{{ post.author.profile.name }}</p>  <!-- post.author.profile.realname y post.author.username -->
+                                <p>{{ post.author.profile.name }}</p>
                             </a>
                         {% else %}
                             <p><img src="{% static 'img/default_user.png' %}" alt="">no user</p>
@@ -66,15 +86,9 @@
                         </div>
                         <div class="sub-menu">
                             <div>
-                                {% if post.comments.count %}
-                                    <a href="{% url 'read_post' post.id %}">
-                                        Comentarios: {{ post.comments.count }}
-                                    </a>
-                                {% else %}
-                                    {% if user.is_authenticated %}
-                                        Add a comment
-                                    {% endif %}
-                                {% endif %}
+                                <a href="{% url 'read_post' post.id %}">
+                                    Comentarios: {{ post.comments.count }}
+                                </a>
                             </div>
                             <div class="editar_publicacion">
                                 <a href="#"><i class="fa-solid fa-heart"></i></a>
@@ -95,3 +109,5 @@
     </div>
 </div>
 {% endblock  %}
+
+<script src="{% static 'js/seleccionar_tab.js' %}"></script>
