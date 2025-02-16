@@ -4,6 +4,8 @@ from .forms import CreatePost, EditPost, CommentCreateForm, ReplyCreateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.core.paginator import Paginator
+from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
@@ -16,12 +18,23 @@ def publicaciones(request, tag=None):
     else:
         posts = Post.objects.all()
 
+    paginator = Paginator(posts, 3)
+    page = int(request.GET.get('page', 1))
+    try:
+        posts = paginator.page(page)
+    except AttributeError:
+        return HttpResponse('')
+
     categories = Tag.objects.all()
     context = {
         'posts': posts, 
         'categories': categories,
-        'tag': tag
+        'tag': tag,
+        'page': page,
     }
+
+    if request.htmx:
+        return render(request, 'snippets/loop_post_paginator.html', context)
     return render(request, 'justicia_app/publicaciones.html', context)
 
 def redes_sociales(request):
@@ -63,7 +76,7 @@ def read_post(request, post_id):
         context2= {
             'comments': comments,
             'reply_create_form': reply_create_form}
-        return render(request, 'snippets/loop_postpage_comments.html', context2)
+        return render(request, 'snippets/loop_post_page_comments.html', context2)
     
     context = {
         'post': post, 

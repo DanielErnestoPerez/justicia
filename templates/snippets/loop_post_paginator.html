@@ -1,7 +1,6 @@
-{% extends './base.html' %}
 {% load static %}
-{% block content %}
-    <div class="container" id="post-container">
+<fade-in _="on load transition my opacity to 1 over 0.4 seconds">
+    <div class="container">
     <div class="row">
         {% for post in posts  %}
             <div class="col-md-4">
@@ -54,7 +53,6 @@
                 </div>
             </div>
         {% endfor %}
-        
     </div>
     </div>
     <div hx-get="{% url 'publicaciones' %}?page={{ page|add:1 }}"
@@ -63,4 +61,4 @@
         hx-swap="outerHTML">
         loading...
     </div>
-{% endblock  %}
+</fade-in>
