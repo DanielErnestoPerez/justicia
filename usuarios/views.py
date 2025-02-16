@@ -17,7 +17,7 @@ def profile(request, username=None):
     else:
         try:
             profile = request.user.profile
-        except AttributeError:
+        except:
             raise Http404()
     
     posts = profile.user.posts.all()
