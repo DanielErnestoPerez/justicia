@@ -26,7 +26,7 @@ class Profile(models.Model):
     def avatar(self):
         try:
             avatar = self.image.url
-        except AttributeError:
+        except:
             avatar = static('img/default_user.png')
         return avatar
     
