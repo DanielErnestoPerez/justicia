@@ -57,7 +57,12 @@
         
     </div>
     </div>
-    <div hx-get="{% url 'publicaciones' %}?page={{ page|add:1 }}"
+    <div hx-get="
+    {% if tag %}
+        {% url 'category' tag.slug %}
+    {% else %}
+        {% url 'publicaciones' %}?page={{ page|add:1 }}
+    {% endif %}"
         hx-trigger="revealed"
         hx-target="this"
         hx-swap="outerHTML">
