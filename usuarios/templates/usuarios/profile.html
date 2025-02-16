@@ -24,7 +24,7 @@
         <ul>
             <li>
                 <div class="tabs_comentarios">
-                    <div id="tabs" hx-target="#tab-contents" hx-swap="innerHTML"
+                    <div id="tabs" hx-target=".row" hx-swap="innerHTML"
                     _='on htmx:afterOnLoad take .selected for event.target'>
                         <button 
                             hx-get="{% url 'user_profile' profile.user.username %}" 
@@ -52,61 +52,7 @@
         </ul>
     </div>
 
-    <div class="container">
-    <div class="row" id='tab-contents'>
-        {% for post in posts  %}
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="publicaciones_titulo">
-                        <p>{{post.titulo}}</p>
-                        {% if post.author %}
-                            <a href="{% url 'user_profile' post.author.username %}" style="display:flex;">
-                                <img src="{{ post.author.profile.avatar }}" alt="">
-                                <p>{{ post.author.profile.name }}</p>
-                            </a>
-                        {% else %}
-                            <p><img src="{% static 'img/default_user.png' %}" alt="">no user</p>
-                        {% endif %}
-                    </div>
-                    <article>
-                        <img class="card-img-top" src="{{ post.imagen_fondo.url }}" alt="">
-                        <a href="{% url 'read_post' post.id %}">
-                            <img class="card-img-top" src="{{ post.imagen_portada.url }}" alt="">
-                        </a>
-                    </article>
-                
-                    <div class="card-body">
-                        <h4 class="card-title">{{post.titulo}}</h4>
-                        <div class="tags">
-                            {% for tag in post.tags.all %}
-                                <a href="{% url 'category' tag.slug %}">
-                                    <span class='tag'>{{ tag }}</span>
-                                </a>
-                            {% endfor %}
-                        </div>
-                        <div class="sub-menu">
-                            <div>
-                                <a href="{% url 'read_post' post.id %}">
-                                    Comentarios: {{ post.comments.count }}
-                                </a>
-                            </div>
-                            <div class="editar_publicacion">
-                                <a href="#"><i class="fa-solid fa-heart"></i></a>
-                                {% if user.is_authenticated and user == post.author %}
-                                    <a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="{% url 'delete_post' post.id %}"><i class="fa-solid fa-trash"></i></a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <a href="{% url 'read_post' post.id %}">
-                            <p class="card-text">{{post.resumen}}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    </div>
+    {% include 'justicia_app/posts.html' %}
 </div>
 {% endblock  %}
 
