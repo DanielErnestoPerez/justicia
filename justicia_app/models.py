@@ -53,7 +53,7 @@ class Comment(models.Model):
     def __str__(self):
         try:
             return f'{self.author.username}:{self.body[:30]}'
-        except AttributeError:
+        except:
             return f'no author :{self.body[:30]}'
 
 class Reply(models.Model):
@@ -72,7 +72,7 @@ class Reply(models.Model):
     def __str__(self):
         try:
             return f'{self.author.username}:{self.body[:30]}'
-        except AttributeError:
+        except:
             return f'no author :{self.body[:30]}'
 
 class LikedPost(models.Model):
