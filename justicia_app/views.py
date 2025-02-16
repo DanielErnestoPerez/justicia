@@ -22,7 +22,7 @@ def publicaciones(request, tag=None):
     page = int(request.GET.get('page', 1))
     try:
         posts = paginator.page(page)
-    except AttributeError:
+    except:
         return HttpResponse('')
 
     categories = Tag.objects.all()
