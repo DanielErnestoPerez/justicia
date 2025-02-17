@@ -23,5 +23,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('justicia_app.urls')),
     path('usuarios/', include('usuarios.urls')),
+    path('inbox/', include('inbox.urls')),
 ]
 

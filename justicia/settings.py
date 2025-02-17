@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'admin_honeypot',
     'justicia_app', 
     'usuarios',
+    'inbox',
 ]
 
 SITE_ID = 1
