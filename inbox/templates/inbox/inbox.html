@@ -1,4 +1,10 @@
 {% extends "justicia_app/base.html" %}
+{% load static %}
 {% block content %}
-hola mundo
+<div class="inbox_externo">
+    <div class="inbox">
+        {% include './my_conversations.html' %}
+        {% include './conversations.html' %}
+    </div>
+</div>
 {% endblock  %}

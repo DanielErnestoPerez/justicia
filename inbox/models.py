@@ -7,8 +7,8 @@ import uuid
 # Create your models here.
 
 class InboxMessage(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
-    conversation = models.ForeignKey('Conversation', on_delete=models.CASCADE, related_name='sender')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    conversation = models.ForeignKey('Conversation', on_delete=models.CASCADE, related_name='messages')
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
 
@@ -30,5 +30,5 @@ class Conversation(models.Model):
         ordering = ['-last_message_created']
     
     def __str__(self):
-        user_names = ', '.join(user.username for user in self.users.all())
-        return f'[Conversation with {user_names}]'
+        user_names = ', '.join(user.username for user in self.participants.all())
+        return f'Conversation with {user_names}'

@@ -1,0 +1,12 @@
+{% load static %}
+{% if users %}
+    {% for user in users %}
+        <a href="#">
+            <img src="{{ user.profile.avatar }}" alt="">
+            {{ user.profile.name }}
+            @{{ user.username }}
+        </a>
+    {% endfor %}
+{% else %}
+    <p>No users found.</p>
+{% endif %} 

@@ -1,0 +1,25 @@
+{% load static %}
+<div class="new_conversation">
+    <a href="#" id="newMessageButton"><i class="fa-solid fa-pen-to-square"></i> New</a>
+</div>
+
+<!-- Ventana emergente -->
+<div id="newMessagePopup" class="popup">
+    <div class="popup-content">
+        <div>
+            <span class="close-btn" id="closePopup">&times;</span>
+            <h2>New Message</h2>
+            <label for="search_users">To:</label>
+            <input type="text" id="search_users" placeholder="Search for a name" name="search_users"
+            hx-get="{% url 'inbox_search_users' %}"
+            hx-trigger="keyup changed"
+            hx-target="#search_results"
+            hx-swap="innerHTML">
+        </div>
+        <div id="search_results">
+            {% include './list_search_users.html' %}
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/form_search_users.js' %}"></script>
