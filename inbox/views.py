@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import InboxMessage, Conversation
 from django.contrib.auth.models import User
@@ -6,6 +6,7 @@ from django.http import HttpResponse, Http404
 from django.db.models import Q
 from usuarios.models import Profile
 from .forms import InboxNewMessageForm
+from django.utils import timezone
 # Create your views here.
 
 @login_required
@@ -43,6 +44,29 @@ def search_users(request):
 def new_message(request, recipient_id):
     recipient = get_object_or_404(User, id=recipient_id)
     new_message_form = InboxNewMessageForm()
+
+    if request.method == 'POST':
+        form = InboxNewMessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            
+            my_conversations = request.user.conversations.all()
+            for conversation in my_conversations:
+                if recipient in conversation.participants.all():
+                    message.conversation = conversation
+                    message.save()
+                    conversation.last_message_created = timezone.now()
+                    conversation.save()
+                    return redirect('inbox', conversation.id)
+            
+            new_conversation = Conversation.objects.create()
+            new_conversation.participants.add(request.user, recipient)
+            new_conversation.save()
+            message.conversation = new_conversation
+            message.save()
+            return redirect('inbox', new_conversation.id)
+
     context = {
         'recipient': recipient,
         'new_message_form': new_message_form,

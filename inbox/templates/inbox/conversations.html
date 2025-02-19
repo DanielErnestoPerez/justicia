@@ -1,12 +1,12 @@
 {% load static %}
 <div class="chat">
     <div class="chat_navbar">
-        <p>Nombre usuario</p>
-        <p>@usuario</p>
+        <p>{{recipient.profile.name}}</p>
+        <p>{{recipient.username}}</p>
     </div>
     {% if conversation %}
         {% if conversation.messages.exists %}
-            {% for message in conversation.messages.all %}
+            {% for message in conversation.messages.all reversed %}
                 <a href="{% url 'inbox' conversation.id %}">
                     {% if participant != request.user %}
                         <div class="message received">
