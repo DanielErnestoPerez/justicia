@@ -1,10 +1,16 @@
 {% load static %}
 {% if users %}
     {% for user in users %}
-        <a href="#">
-            <img src="{{ user.profile.avatar }}" alt="">
-            {{ user.profile.name }}
-            @{{ user.username }}
+        <a hx-get="{% url 'inbox_new_message' user.id %}"
+            hx-target="#new_message"
+            hx-swap="innerHTML">
+            <div class="searched_users">
+                <img src="{{ user.profile.avatar }}" alt="">
+                <div class="searched_users_name">
+                    <p>{{ user.profile.name }}</p>
+                    <p>@{{ user.username }}</p>
+                </div>
+            </div>
         </a>
     {% endfor %}
 {% else %}

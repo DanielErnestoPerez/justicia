@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.db.models import Q
 from usuarios.models import Profile
+from .forms import InboxNewMessageForm
 # Create your views here.
 
 @login_required
@@ -25,7 +26,7 @@ def search_users(request):
     letters = request.GET.get('search_users', '').strip()
     if request.htmx:
         if len(letters) > 0:
-            profiles = Profile.objects.filter(realname__icontains=letters).exclude(realname=request.user.profile.realname)
+            profiles = Profile.objects.filter(real_name__icontains=letters).exclude(real_name=request.user.profile.real_name)
             users_id = profiles.values_list('user', flat=True)
             users = User.objects.filter(
                 Q(username__icontains=letters) | Q(id__in=users_id)
@@ -37,3 +38,13 @@ def search_users(request):
             return HttpResponse('')
     else:
         raise Http404()
+
+@login_required
+def new_message(request, recipient_id):
+    recipient = get_object_or_404(User, id=recipient_id)
+    new_message_form = InboxNewMessageForm()
+    context = {
+        'recipient': recipient,
+        'new_message_form': new_message_form,
+    }
+    return render(request, 'inbox/form_new_message.html', context)

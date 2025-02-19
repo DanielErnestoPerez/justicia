@@ -23,7 +23,6 @@
                             <img src="{% static 'img/default_user.png' %}" alt="">
                         </div>
                     {% endif %}
-                        
                 </a>
             {% endfor %}
         {% else %}
@@ -32,7 +31,9 @@
         </div>
         {% endif %}
     {% else %}
-        <p>No hay conversación seleccionada</p>
+        <div class="conversacion_empty">
+            <p>No hay conversación seleccionada</p>
+        </div>
     {% endif %}
 
     <div class="chat_send_message">

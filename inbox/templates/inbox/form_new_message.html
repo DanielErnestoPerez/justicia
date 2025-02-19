@@ -1,0 +1,12 @@
+<div>
+    <img src="{{recipient.profile.avatar}}" alt="">
+    <h3>{{ recipient.profile.name }} @{{ recipient.username }}</h3>
+</div>
+<div>
+    <form action="{% url 'inbox_new_message' recipient.id %}" method="post">
+        {% csrf_token %}
+        {{new_message_form}}
+        <input type="submit" value="Submit" class='confirm_button'>
+        <a href="{{ request.META.HTTP_REFERER }}" class='cancel_button'>Cancel</a>
+    </form>
+</div>

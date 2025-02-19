@@ -4,14 +4,14 @@
     {% for conversation in my_conversations  %}
         <div class="my_conversations_all">
             <a href="{% url 'inbox' conversation.id %}">
-                {% for participant in conversation.participants.all %}
-                    {% if participant != request.user %}
-                        <div class="my_conversations_user">
-                            <img src="{{participant.profile.avatar}}" alt="">
-                            <p>{{ participant.profile.name }}</p>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+            {% for participant in conversation.participants.all %}
+                {% if participant != request.user %}
+                    <div class="my_conversations_user">
+                        <img src="{{participant.profile.avatar}}" alt="">
+                        <p>{{ participant.profile.name }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
             </a>
         </div>
     {% endfor %}
