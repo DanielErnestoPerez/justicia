@@ -11,7 +11,8 @@ class InboxNewMessageForm(forms.ModelForm):
         widgets = {
             'body': forms.Textarea(attrs={
                 'placeholder': 'Write your message',
-                'rows': 3,
                 'class': 'custom_inbox_textarea',
-                }
-                )},
+                'rows': 3,
+                'cols': 50,
+                }),
+        }

@@ -2,7 +2,7 @@
 {% if users %}
     {% for user in users %}
         <a hx-get="{% url 'inbox_new_message' user.id %}"
-            hx-target="#new_message"
+            hx-target="#newMessagePopup"
             hx-swap="innerHTML">
             <div class="searched_users">
                 <img src="{{ user.profile.avatar }}" alt="">
