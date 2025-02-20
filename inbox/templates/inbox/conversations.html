@@ -1,8 +1,8 @@
 {% load static %}
 <div class="chat">
     <div class="chat_navbar">
-        <p>{{recipient.profile.name}}</p>
-        <p>{{recipient.username}}</p>
+        <p>{{participant.profile.name}}</p>
+        <p>{{participant.username}}</p>
     </div>
     <div class="conversation">
         {% if conversation %}
@@ -11,7 +11,11 @@
                     <a href="{% url 'inbox' conversation.id %}">
                         {% if message.sender != request.user %}
                             <div class="message received">
-                                <img src="{% static 'img/default_user.png' %}" alt="">
+                                {% for participant in conversation.participants.all %}
+                                    <a href="{% url 'user_profile' participant.username %}">
+                                        <img src="{{participant.profile.avatar}}" alt="">
+                                    </a>
+                                {% endfor %}
                                 <div class="message-content">
                                     {{message.body}}
                                 </div>
@@ -21,7 +25,9 @@
                                 <div class="message-content">
                                     {{message.body}}
                                 </div>
-                                <img src="{% static 'img/default_user.png' %}" alt="">
+                                <a href="{% url 'user_profile' user.username %}">
+                                    <img src="{{user.profile.avatar}}" alt="">
+                                </a>
                             </div>
                         {% endif %}
                     </a>
