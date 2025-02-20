@@ -4,39 +4,47 @@
         <p>{{recipient.profile.name}}</p>
         <p>{{recipient.username}}</p>
     </div>
-    {% if conversation %}
-        {% if conversation.messages.exists %}
-            {% for message in conversation.messages.all reversed %}
-                <a href="{% url 'inbox' conversation.id %}">
-                    {% if participant != request.user %}
-                        <div class="message received">
-                            <img src="{% static 'img/default_user.png' %}" alt="">
-                            <div class="message-content">
-                                {{message.body}}
+    <div class="conversation">
+        {% if conversation %}
+            {% if conversation.messages.exists %}
+                {% for message in conversation.messages.all reversed %}
+                    <a href="{% url 'inbox' conversation.id %}">
+                        {% if message.sender != request.user %}
+                            <div class="message received">
+                                <img src="{% static 'img/default_user.png' %}" alt="">
+                                <div class="message-content">
+                                    {{message.body}}
+                                </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <div class="message sent">
-                            <div class="message-content">
-                                {{message.body}}
+                        {% else %}
+                            <div class="message sent">
+                                <div class="message-content">
+                                    {{message.body}}
+                                </div>
+                                <img src="{% static 'img/default_user.png' %}" alt="">
                             </div>
-                            <img src="{% static 'img/default_user.png' %}" alt="">
-                        </div>
-                    {% endif %}
-                </a>
-            {% endfor %}
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            {% else %}
+            <div class="conversacion_empty">
+                <p>No hay mensajes en este chat</p>
+            </div>
+            {% endif %}
         {% else %}
-        <div class="conversacion_empty">
-            <p>No hay mensajes en este chat</p>
-        </div>
+            <div class="conversacion_empty">
+                <p>No hay conversación seleccionada</p>
+            </div>
         {% endif %}
-    {% else %}
-        <div class="conversacion_empty">
-            <p>No hay conversación seleccionada</p>
-        </div>
-    {% endif %}
+    </div>
 
     <div class="chat_send_message">
-        <p>reply</p>
+        {% if conversation and conversation.id %}
+            <a hx-get="{% url 'inbox_new_reply' conversation.id %}"
+            hx-target="this"
+            hx-swap="outerHTML scroll:#conversation:bottom">
+                Reply
+            </a>    
+        {% endif %}
     </div>
 </div>

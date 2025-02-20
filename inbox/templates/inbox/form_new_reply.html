@@ -1,0 +1,9 @@
+<div class="conversation_reply">
+    <form action="{% url 'inbox_new_reply' conversation.id %}" method="post">
+        {% csrf_token %}
+        <div class="conversation_reply_interno">
+            {{ new_message_form }}
+            <input type="submit" value="Send" class='confirm_button'>
+        </div>
+    </form>
+</div>
