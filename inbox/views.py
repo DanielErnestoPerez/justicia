@@ -33,7 +33,6 @@ def search_users(request):
                 Q(username__icontains=letters) | Q(id__in=users_id)
             ).exclude(username=request.user.username)
 
-
             return render(request, 'inbox/list_search_users.html', {'users': users})
         else:
             return HttpResponse('')
