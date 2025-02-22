@@ -30,7 +30,15 @@
                     <li><a href="{% url 'home' %}">Inicio</a></li>
                     <li><a href="{% url 'publicaciones' %}">Publicaciones</a></li>
                     <li><a href="{% url 'redes_sociales' %}">Redes Sociales</a></li>
-                    <li><a href="{% url 'inbox' %}">Inbox</a></li>
+                    <li style="position: relative;">
+                        <div class="notification_navbar"
+                            hx-get="{% url 'inbox_notification' %}"
+                            hx-trigger="load"
+                            hx-target="this"
+                            hx-swap="innerHTML">
+                        </div>
+                        <a href="{% url 'inbox' %}">Inbox</a>
+                    </li>
                 </ul>
                 <div class="crear_publicacion_menu">
                     <img src="{{ user.profile.avatar }}" alt="">

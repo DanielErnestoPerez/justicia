@@ -7,6 +7,11 @@
             {% for participant in conversation.participants.all %}
                 {% if participant != request.user %}
                     <div class="my_conversations_user">
+                        <div hx-get="{% url 'notification' conversation.id %}"
+                            hx-trigger="load"
+                            hx-target="this"
+                            hx-swap="innerHTML">
+                        </div>
                         <img src="{{participant.profile.avatar}}" alt="">
                         <p>{{ participant.profile.name }}</p>
                     </div>
