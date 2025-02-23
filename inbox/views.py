@@ -60,21 +60,10 @@ def new_message(request, recipient_id):
 
             #encrypt the message
             message_original = form.cleaned_data['body']
-            message_bytes = message_original.encode('utf8')
+            message_bytes = message_original.encode('utf-8')
             message_encrypted = f.encrypt(message_bytes)
-            message_decoded = message_encrypted.decode('utf8')
-
-            print('message_original', message_original)
-            print('message_bytes', message_bytes)
-            print('message_encrypted', message_encrypted)
-            print('message_decoded', message_decoded)
-
-            message_decrypted = f.decrypt(message_decoded)
-            message_decoded = message_decrypted.decode('utf8')
-
-            print('message_decrypted', message_decrypted)
-            print('message_decoded', message_decoded)
-
+            message_decoded = message_encrypted.decode('utf-8')
+            message.body = message_decoded
 
 
             message.sender = request.user
@@ -113,6 +102,14 @@ def new_reply(request, conversation_id):
         form = InboxNewMessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
+
+            #encrypt the message
+            message_original = form.cleaned_data['body']
+            message_bytes = message_original.encode('utf-8')
+            message_encrypted = f.encrypt(message_bytes)
+            message_decoded = message_encrypted.decode('utf-8')
+            message.body = message_decoded
+
             message.sender = request.user
             message.conversation = conversation
             message.save()
@@ -131,16 +128,16 @@ def new_reply(request, conversation_id):
 def notification(request, conversation_id):
     conversation = get_object_or_404(Conversation, id=conversation_id)
     latest_message = conversation.messages.first()
-    if conversation.is_seen == False and latest_message.sender != request.user:
+    if latest_message and conversation.is_seen == False and latest_message.sender != request.user:
         return render(request, 'inbox/notification.html')
     else:
         return HttpResponse('')
-        
+
 
 def inbox_notification(request):
     my_conversations = Conversation.objects.filter(participants=request.user, is_seen=False)
     for conversation in my_conversations:
         latest_message = conversation.messages.first()
-        if latest_message.sender != request.user:
+        if latest_message and latest_message.sender != request.user:
             return render(request, 'inbox/notification.html')
     return HttpResponse('')

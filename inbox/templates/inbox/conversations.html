@@ -17,13 +17,13 @@
                                     </a>
                                 {% endfor %}
                                 <div class="message-content">
-                                    {{message.body}}
+                                    {{message.body_decrypted}}
                                 </div>
                             </div>
                         {% else %}
                             <div class="message sent">
                                 <div class="message-content">
-                                    {{message.body}}
+                                    {{message.body_decrypted}}
                                 </div>
                                 <a href="{% url 'user_profile' user.username %}">
                                     <img src="{{user.profile.avatar}}" alt="">
