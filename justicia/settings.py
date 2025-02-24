@@ -42,7 +42,7 @@ POSTGRES_LOCALLY = True
 if ENVIRONMENT == 'production'or POSTGRES_LOCALLY == True:
     DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', env('RENDER_EXTERNAL_HOSTNAME', default='')]
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -207,8 +207,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'danielernesto342@gmail.com'
-EMAIL_HOST_PASSWORD='rikp dkzz ikjg hvwr'
+EMAIL_HOST_USER = env('EMAIL_ADDRESS')
+EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = f'Justicia Restaurativa Cuba {env("EMAIL_ADDRESS")}'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
