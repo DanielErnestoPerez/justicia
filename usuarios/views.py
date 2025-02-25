@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count
 from justicia_app .forms import CommentCreateForm, ReplyCreateForm
+from allauth.account.utils import send_email_confirmation
 # Create your views here.
 
 def profile(request, username=None):
@@ -61,7 +62,11 @@ def profile_edit(request):
         profile_edit = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if profile_edit.is_valid():
             profile_edit.save()
-            return redirect('profile')
+
+            if request.user.emailaddress_set.get(primary=True).verified:
+                return redirect('profile')
+            else:
+                return redirect('profile_verify_email')
         
     if request.path == reverse('profile_onboarding'):
         template = 'usuarios/profile_onboarding.html'
@@ -79,3 +84,7 @@ def profile_delete(request):
         messages.success(request, 'Profile deleted')
         return redirect('home')
     return render(request, 'usuarios/profile_delete.html')
+
+def profile_verify_email(request):
+    send_email_confirmation(request, request.user)
+    return redirect('profile')
