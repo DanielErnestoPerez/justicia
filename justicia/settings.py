@@ -44,6 +44,8 @@ if ENVIRONMENT == 'production'or POSTGRES_LOCALLY == True:
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', env('RENDER_EXTERNAL_HOSTNAME', default='')]
 
+CSRF_TRUSTED_ORIGINS =['https://*.onrender.com']
+
 INTERNAL_IPS = (
     '127.0.0.1',
     'localhost:8000',
@@ -60,6 +62,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 ENCRYPT_KEY = b'ZxLm-vhq8r5NurRsqi_wCXxTGNMscYcmPPHQcwDyBCM='
+
+#Feature Toggle
+DEVELOPER = env('DEVELOPER', default='')
+STAGING = env('STAGING', default='False')
+
+
 
 # Application definition
 
@@ -82,6 +90,7 @@ INSTALLED_APPS = [
     'justicia_app', 
     'usuarios',
     'inbox',
+    'features',
 ]
 
 SITE_ID = 1
@@ -170,22 +179,21 @@ MEDIA_URL = '/media/'
 
 if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': env('CLOUD_NAME'),
+        'API_KEY': env('CLOUD_API_KEY'),
+        'API_SECRET': env('CLOUD_API_SECRET'),
+    }
+    
+    cloudinary.config(
+        cloud_name = env('CLOUD_NAME'),
+        api_key = env('CLOUD_API_KEY'),
+        api_secret = env('CLOUD_API_SECRET'),
+        secure = True,
+    )
 else:
     MEDIA_ROOT = BASE_DIR / 'media'
 
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': env('CLOUD_NAME'),
-    'API_KEY': env('CLOUD_API_KEY'),
-    'API_SECRET': env('CLOUD_API_SECRET'),
-}
-
-cloudinary.config(
-    cloud_name = env('CLOUD_NAME'),
-    api_key = env('CLOUD_API_KEY'),
-    api_secret = env('CLOUD_API_SECRET'),
-    secure = True,
-)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
