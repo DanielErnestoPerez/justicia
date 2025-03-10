@@ -10,60 +10,81 @@
 {% block content %}
 <div class="create_post_externo">
     <div class="create_post">
-            <h1>{% trans "Log In" %}</h1>
+        <h1>{% trans "Log In" %}</h1>
 
-            {% if not SOCIALACCOUNT_ONLY %}
-                <p>
-                    {% trans "If you have not created an account yet, then please" %}
-                    <a href="{{ signup_url }}">{% trans "sign up" %}</a>
-                    {% trans "first." %}
-                </p>
+        {% if not SOCIALACCOUNT_ONLY %}
+            <p>
+                {% trans "If you have not created an account yet, then please" %}
+                <a href="{{ signup_url }}">{% trans "sign up" %}</a>
+                {% trans "first." %}
+            </p>
 
-                {% url 'account_login' as login_url %}
-                <form method="post" action="{{ login_url }}" class="entrance_login">
-                    {% csrf_token %}
-                    
-                    <div class="form-fields">
-                        {% element fields form=form unlabeled=True %}
-                        {% endelement %}
-                    </div>
-                    {{ redirect_field }}
-                    <div class="allauth_menu">
-                        <input type="submit" value="Log in" class='confirm_button'>
-                        <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>Cancel</a>
-                    </div>
-                </form>
-            {% endif %}
+            {% url 'account_login' as login_url %}
+            <form method="post" action="{{ login_url }}" class="entrance_login">
+                {% csrf_token %}
 
-            {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
-                <hr />
-
-                <div class="button-group vertical">
-                    {% if PASSKEY_LOGIN_ENABLED %}
-                        <button type="submit" form="mfa_login" id="passkey_login" class="prominent login outline primary">
-                            {% trans "Sign in with a passkey" %}
-                        </button>
-                    {% endif %}
-                    
-                    {% if LOGIN_BY_CODE_ENABLED %}
-                        <a href="{{ request_login_code_url }}" class="prominent login outline primary">
-                            {% trans "Mail me a sign-in code" %}
-                        </a>
-                    {% endif %}
+                <div class="form-fields">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">
+                                {% if field.name == 'username' %}
+                                    <i class="fas fa-user"></i>  <!-- Icono de usuario -->
+                                {% elif field.name == 'password' %}
+                                    <i class="fas fa-lock"></i>  <!-- Icono de candado -->
+                                {% endif %}
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endif %}
 
-            {% if SOCIALACCOUNT_ENABLED %}
-                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-            {% endif %}
-        {% endblock content %}
+                {{ redirect_field }}
+                
+                <div class="allauth_menu">
+                    <input type="submit" value="{% trans 'Log in' %}" class='confirm_button'>
+                    <a href="{{ request.GET.next|default:'/' }}" class='cancel_button'>{% trans 'Cancel' %}</a>
+                </div>
+            </form>
 
-    {% block extra_body %}
-        {{ block.super }}
-        
-        {% if PASSKEY_LOGIN_ENABLED %}
-            {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
+            <!-- Enlace de "Olvidaste tu contraseña" -->
+            <div class="password-reset-link">
+                <a href="{% url 'account_reset_password' %}">
+                    {% trans "Forgot your password?" %}
+                </a>
+            </div>
+
         {% endif %}
-    {% endblock %}
+
+        {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+            <hr />
+
+            <div class="button-group vertical">
+                {% if PASSKEY_LOGIN_ENABLED %}
+                    <button type="submit" form="mfa_login" id="passkey_login" class="prominent login outline primary">
+                        {% trans "Sign in with a passkey" %}
+                    </button>
+                {% endif %}
+
+                {% if LOGIN_BY_CODE_ENABLED %}
+                    <a href="{{ request_login_code_url }}" class="prominent login outline primary">
+                        {% trans "Mail me a sign-in code" %}
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if SOCIALACCOUNT_ENABLED %}
+            {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+        {% endif %}
     </div>
 </div>
+{% endblock content %}
+
+{% block extra_body %}
+    {{ block.super }}
+
+    {% if PASSKEY_LOGIN_ENABLED %}
+        {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
+    {% endif %}
+{% endblock %}
