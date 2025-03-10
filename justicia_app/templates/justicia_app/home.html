@@ -3,119 +3,272 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<div class="home_menu_externo">
-    <div class="home_menu_lateral">
-        <ul class="accordion_menu_principal">
-            <li>
-                <label for="1">¿Qué es la justicia restaurativa? <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="1">
-                <div class="contenido_accordion_menu_principal">
-                    Justicia Restaurativa es un enfoque alternativo de resolución de conflictos que busca reparar el daño causado por un delito o conflicto, priorizando las necesidades de las víctimas, la responsabilidad de los ofensores y la participación activa de la comunidad.
-                </div>
-            </li>
-            <li>
-                <label for="2">Beneficios de la justicia restaurativa <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="2">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">Para víctimas</a></li>
-                        <li><a href="#">Para infractores</a></li>
-                        <li><a href="#">Para la comunidad</a></li>
-                        <li><a href="#">Para el sistema judicial</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <label for="3">Métodos y procesos <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="3">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">Círculos restaurativos</a></li>
-                        <li><a href="#">Mediación víctima-infractor</a></li>
-                        <li><a href="#">Conferencias grupales</a></li>
-                        <li><a href="#">Prácticas dialógicas</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <label for="4">Experiencia cubana <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="4">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">Programas escolares contra el bullying</a></li>
-                        <li><a href="#">Reinserción de jóvenes infractores</a></li>
-                        <li><a href="#">Conflictos vecinales resueltos</a></li>
-                        <li><a href="#">Experiencias en prisiones</a></li>
-                        <li><a href="#">Casos internacionales destacados</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <label for="5">Áreas de aplicación <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="5">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">En el ámbito educativo</a></li>
-                        <li><a href="#">En el sistema penal</a></li>
-                        <li><a href="#">En comunidades locales</a></li>
-                        <li><a href="#">En el ámbito laboral</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <label for="6">Recursos y herramientas <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="6">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">Guías prácticas</a></li>
-                        <li><a href="#">Materiales de formación</a></li>
-                        <li><a href="#">Documentación legal</a></li>
-                        <li><a href="#">Bibliografía recomendada</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <label for="7">FAQ (Preguntas Frecuentes) <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="7">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">¿En qué se diferencia de la justicia tradicional?</a></li>
-                        <li><a href="#">¿Es aplicable a todo tipo de delitos?</a></li>
-                        <li><a href="#">¿Cómo se garantiza la seguridad de las víctimas?</a></li>
-                        <li><a href="#">¿Qué resultados se han demostrado?</a></li>
-                        <li><a href="#">¿Cuánto dura un proceso restaurativo?</a></li>
-                        <li><a href="#">¿Cómo puedo participar?</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <label for="8">Noticias y actualizaciones <span>&#x3e;</span></label>
-                <input type="checkbox" name="accordion_menu_principal" id="8">
-                <div class="contenido_accordion_menu_principal">
-                    <ul>
-                        <li><a href="#">Guías prácticas</a></li>
-                        <li><a href="#">Materiales de formación</a></li>
-                        <li><a href="#">Documentación legal</a></li>
-                        <li><a href="#">Bibliografía recomendada</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+    <div class="home_menu_externo">
+        <div class="home_menu_lateral">
+            <ul class="accordion_menu_principal">
+                <li>
+                    <label for="1">¿Qué es la justicia restaurativa? <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="1">
+                    <div class="contenido_accordion_menu_principal">
+                        Justicia Restaurativa es un enfoque alternativo de resolución de conflictos que busca reparar el daño causado por un delito o conflicto, priorizando las necesidades de las víctimas, la responsabilidad de los ofensores y la participación activa de la comunidad.
+                    </div>
+                </li>
+                <li>
+                    <label for="2">Beneficios de la justicia restaurativa <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="2">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">Para víctimas</a></li>
+                            <li><a href="#">Para infractores</a></li>
+                            <li><a href="#">Para la comunidad</a></li>
+                            <li><a href="#">Para el sistema judicial</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="3">Métodos y procesos <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="3">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">Círculos restaurativos</a></li>
+                            <li><a href="#">Mediación víctima-infractor</a></li>
+                            <li><a href="#">Conferencias grupales</a></li>
+                            <li><a href="#">Prácticas dialógicas</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="4">Experiencia cubana <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="4">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">Programas escolares contra el bullying</a></li>
+                            <li><a href="#">Reinserción de jóvenes infractores</a></li>
+                            <li><a href="#">Conflictos vecinales resueltos</a></li>
+                            <li><a href="#">Experiencias en prisiones</a></li>
+                            <li><a href="#">Casos internacionales destacados</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="5">Áreas de aplicación <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="5">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">En el ámbito educativo</a></li>
+                            <li><a href="#">En el sistema penal</a></li>
+                            <li><a href="#">En comunidades locales</a></li>
+                            <li><a href="#">En el ámbito laboral</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="6">Recursos y herramientas <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="6">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">Guías prácticas</a></li>
+                            <li><a href="#">Materiales de formación</a></li>
+                            <li><a href="#">Documentación legal</a></li>
+                            <li><a href="#">Bibliografía recomendada</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="7">FAQ (Preguntas Frecuentes) <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="7">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">¿En qué se diferencia de la justicia tradicional?</a></li>
+                            <li><a href="#">¿Es aplicable a todo tipo de delitos?</a></li>
+                            <li><a href="#">¿Cómo se garantiza la seguridad de las víctimas?</a></li>
+                            <li><a href="#">¿Qué resultados se han demostrado?</a></li>
+                            <li><a href="#">¿Cuánto dura un proceso restaurativo?</a></li>
+                            <li><a href="#">¿Cómo puedo participar?</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <label for="8">Noticias y actualizaciones <span>&#x3e;</span></label>
+                    <input type="checkbox" name="accordion_menu_principal" id="8">
+                    <div class="contenido_accordion_menu_principal">
+                        <ul>
+                            <li><a href="#">Guías prácticas</a></li>
+                            <li><a href="#">Materiales de formación</a></li>
+                            <li><a href="#">Documentación legal</a></li>
+                            <li><a href="#">Bibliografía recomendada</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="home_menu_principal">
+            Hola, bienvenido a la pagina oficial de Justicia Restaurativa Cuba. Por el momento la pagina solo esta disponible para pruebas. Por favor sea paciente. Trabajamos por crear un producto acorde a sus necesidades como cliente.
+        </div>
     </div>
-    <div class="home_menu_principal">
-        Hola, bienvenido a la pagina oficial de Justicia Restaurativa Cuba. Por el momento la pagina solo esta disponible para pruebas. Por favor sea paciente. Trabajamos por crear un producto acorde a sus necesidades como cliente.
-    </div>
-</div>
 {% else %}
-<div class="create_post_externo">
-    <div class="create_post">
-        <h1>Bienvenido a Justicia Restaurativa Cuba</h1>
-        <p>Esta es una plataforma de información sobre la justicia restaurativa, diseñada para apoyar a las personas que buscan mejorar su calidad de vida y la seguridad de sus familias.</p>
-        <p>Para acceder a la información, inicia sesión o regístrate.</p>
-        <a href="{% url 'account_login' %}">Iniciar sesión</a>
-        <a href="{% url 'account_signup' %}">Regístrate</a>
+<!-- carousel -->
+<div class="carousel">
+    <!-- list item -->
+    <div class="list">
+        <div class="item">
+            <img src="{% static 'img/img1.jpg' %}" alt="">
+            <div class="content">
+                <div class="author">LUNDEV</div>
+                <div class="title">DESIGN SLIDER</div>
+                <div class="topic">ANIMAL</div>
+                <div class="des">
+                    <!-- lorem 50 -->
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/img2.jpg' %}" alt="">
+            <div class="content">
+                <div class="author">LUNDEV</div>
+                <div class="title">DESIGN SLIDER</div>
+                <div class="topic">ANIMAL</div>
+                <div class="des">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/img3.png' %}" alt="">
+            <div class="content">
+                <div class="author">LUNDEV</div>
+                <div class="title">DESIGN SLIDER</div>
+                <div class="topic">ANIMAL</div>
+                <div class="des">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/img4.jpg' %}" alt="">
+            <div class="content">
+                <div class="author">LUNDEV</div>
+                <div class="title">DESIGN SLIDER</div>
+                <div class="topic">ANIMAL</div>
+                <div class="des">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- list thumnail -->
+    <div class="thumbnail">
+        <div class="item">
+            <img src="{% static 'img/img1.jpg' %}" alt="">
+            <div class="content">
+                <div class="title">
+                    Name Slider
+                </div>
+                <div class="description">
+                    Description
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/img2.jpg' %}" alt="">
+            <div class="content">
+                <div class="title">
+                    Name Slider
+                </div>
+                <div class="description">
+                    Description
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/img3.png' %}" alt="">
+            <div class="content">
+                <div class="title">
+                    Name Slider
+                </div>
+                <div class="description">
+                    Description
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="{% static 'img/img4.jpg' %}" alt="">
+            <div class="content">
+                <div class="title">
+                    Name Slider
+                </div>
+                <div class="description">
+                    Description
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- next prev -->
+
+    <div class="arrows">
+        <button id="prev"><</button>
+        <button id="next">></button>
+    </div>
+    <!-- time running -->
+    <div class="time"></div>
 </div>
+<div class="contenido">
+    <section class="Acerca_De_Mi" id="Acerca_De_Mi">
+        <div class="caja-padre">
+            <div class="caja">
+                <div class="caja1">
+                    <img src="{% static 'img/comunicacion.jpg' %}" alt="">
+                    <h3>Comunicacion</h3>
+                    <p>"La guitarra no es solo un instrumento, es una voz que expresa lo que las palabras no pueden. Cada acorde cuenta una historia, y cada melodía conecta el alma con la música. Aquí, celebramos su magia."</p>
+                    <a href="#" class="btn">VER MAS</a>
+                </div>
+            </div>
+            <div class="caja">
+                <div class="caja2">
+                    <img src="{% static 'img/profesionalidad.jpg' %}" alt="">
+                    <h3>Profesionalidad</h3>
+                    <p>"Programar es crear mundos desde cero, un proceso fascinante en el que la imaginación se convierte en código. Al igual que un arquitecto diseña estructuras que luego cobran vida, el programador construye sistemas que cambian la forma en que vivimos."</p>
+                    <a href="#" class="btn">VER MAS</a>
+                </div>
+            </div>
+            <div class="caja">
+                <div class="caja3">
+                    <img src="{% static 'img/compromiso.jpg' %}" alt="">
+                    <h3>Compromiso</h3>
+                    <p>"Los gatos son criaturas enigmáticas y fascinantes que combinan independencia con ternura de una manera única. Su gracia y curiosidad los convierten en excelentes amigos, siempre dispuestos a descubrir el mundo con nosotros."</p>
+                    <a href="#" class="btn">VER MAS</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card_deck">
+        <div class="stack_area">
+            <div class="left">
+                <h1>Hola mundo</h1>
+            </div>
+            <div class="right">
+                <div class="cards">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora asperiores cum obcaecati ad impedit non amet, tempore, minus nihil voluptatibus deserunt, aliquam unde quibusdam harum at corporis repellendus nobis ipsam!</p>
+                </div>
+                <div class="cards">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora asperiores cum obcaecati ad impedit non amet, tempore, minus nihil voluptatibus deserunt, aliquam unde quibusdam harum at corporis repellendus nobis ipsam!</p>
+                </div>
+                <div class="cards">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora asperiores cum obcaecati ad impedit non amet, tempore, minus nihil voluptatibus deserunt, aliquam unde quibusdam harum at corporis repellendus nobis ipsam!</p>
+                </div>
+                <div class="cards">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora asperiores cum obcaecati ad impedit non amet, tempore, minus nihil voluptatibus deserunt, aliquam unde quibusdam harum at corporis repellendus nobis ipsam!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/deck_cards.js' %}"></script>
 {% endif %}
 
 {% endblock  %}
