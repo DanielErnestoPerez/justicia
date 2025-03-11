@@ -1164,10 +1164,17 @@ article:hover img:last-child{
     width: 100%;
     display: flex;
     z-index: 1;
-    height: 50vh;
+    height: 60vh;
 }
 .left{
     flex-basis: 50%;
+    position: relative;
+}
+.left img{
+    width: 50vh;
+    position: absolute;
+    top: calc(50% - 12rem);
+    right: calc(50% - 10rem);
 }
 .right{
     flex-basis: 50%;
@@ -1179,7 +1186,8 @@ article:hover img:last-child{
     position: absolute;
     top: calc(50% - 175px);
     left: calc(50% - 175px);
-    width: 50%;
+    width: 20rem;
+    height: 20rem;
     transition: 
         transform .5s ease-in-out, 
         opacity .5s ease-out;
@@ -1400,7 +1408,7 @@ footer{
 /* arrows */
 .arrows{
     position: absolute;
-    top: 80%;
+    bottom: 5%;
     right: 52%;
     z-index: 100;
     width: 300px;
@@ -1423,6 +1431,10 @@ footer{
 .arrows button:hover{
     background-color: #fff;
     color: #000;
+}
+
+.des{
+    width: 80%;
 }
 
 /* animation */
