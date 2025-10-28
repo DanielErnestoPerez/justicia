@@ -41,6 +41,10 @@ def redes_sociales(request):
     return render(request, 'justicia_app/redes_sociales.html')
 
 
+def biblioteca(request):
+    return render(request, 'justicia_app/biblioteca.html')
+
+
 @login_required
 def create_post(request):
     create_post = CreatePost()

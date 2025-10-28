@@ -3,8 +3,10 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-    <div class="home_menu_externo">
-        <div class="home_menu_lateral">
+    <button id="menu_elementoButton" onclick="toggleMenu()">☰</button>
+
+    <div class="menu_elemento" id="menu_elemento">
+        <div class="home_izquierdo">
             <ul class="accordion_menu_principal">
                 <li>
                     <label for="1">¿Qué es la justicia restaurativa? <span>&#x3e;</span></label>
@@ -18,9 +20,9 @@
                     <input type="checkbox" name="accordion_menu_principal" id="2">
                     <div class="contenido_accordion_menu_principal">
                         <ul>
-                            <li><a href="#">Para víctimas</a></li>
-                            <li><a href="#">Para infractores</a></li>
-                            <li><a href="#">Para la comunidad</a></li>
+                            <li><a onclick="mostrarElemento('victimas')">Para víctimas</a></li>
+                            <li><a onclick="mostrarElemento('servicios')">Para infractores</a></li>
+                            <li><a onclick="mostrarElemento('contacto')">Para la comunidad</a></li>
                             <li><a href="#">Para el sistema judicial</a></li>
                         </ul>
                     </div>
@@ -83,7 +85,7 @@
                             <li><a href="#">¿Es aplicable a todo tipo de delitos?</a></li>
                             <li><a href="#">¿Cómo se garantiza la seguridad de las víctimas?</a></li>
                             <li><a href="#">¿Qué resultados se han demostrado?</a></li>
-                            <li><a href="#">¿Cuánto dura un proceso restaurativo?</a></li>
+                            <li><a href="#">¿Cuánto dura el proceso?</a></li>
                             <li><a href="#">¿Cómo puedo participar?</a></li>
                         </ul>
                     </div>
@@ -102,10 +104,62 @@
                 </li>
             </ul>
         </div>
-        <div class="home_menu_principal">
-            Hola, bienvenido a la pagina oficial de Justicia Restaurativa Cuba. Por el momento la pagina solo esta disponible para pruebas. Por favor sea paciente. Trabajamos por crear un producto acorde a sus necesidades como cliente.
+    </div>
+
+    <div class="elemento-container" id="elemento-container">
+        <div id="victimas" class="elemento mostrar">
+            <h2>Reparación del daño</h2>
+            <ul>
+                <li>A través de acuerdos mutuos, las víctimas pueden recibir una compensación directa que contribuya a reparar el daño causado.</li>
+                <li>Esta reparación puede ser económica, material o simbólica (como disculpas públicas o trabajo comunitario en favor de la víctima o su entorno).</li>
+            </ul>
+
+
+            <h2>Sanación emocional y psicológica</h2>
+            <ul>
+                <li>Permite que las víctimas comprendan mejor por qué ocurrió el delito, lo que puede aliviar sentimientos de incertidumbre o culpa.</li>
+                <li>Expresar sus emociones en un entorno seguro puede ayudarles a procesar el trauma y encontrar paz interior.</li>
+                <li>Al escuchar el reconocimiento del daño por parte del infractor, las víctimas pueden encontrar un mayor sentido de cierre emocional.</li>
+            </ul>
+
+
+            <h2>Reducción del miedo e inseguridad</h2>
+            <ul>
+                <li>Al conocer de primera mano las motivaciones del infractor y al establecer un diálogo controlado, las víctimas pueden reducir su temor a futuros encuentros con el agresor.</li>
+                <li>Esto es especialmente importante en casos donde víctima e infractor comparten el mismo entorno social o comunitario.</li>
+            </ul>
+
+
+            <h2>Empoderamiento</h2>
+            <ul>
+                <li>Las víctimas tienen un rol activo en el proceso, lo que les permite expresar sus sentimientos, preocupaciones y necesidades.</li>
+                <li>Al participar directamente en el diálogo con el infractor, recuperan el control sobre una situación que previamente las dejó vulnerables.</li>
+                <li>Esta participación activa puede ayudar a reducir la sensación de impotencia que muchas víctimas experimentan tras un delito.</li>
+            </ul>
+
+            <h2>Respuestas y aclaraciones</h2>
+            <ul>
+                <li>Muchas víctimas quedan con preguntas sin resolver tras un delito. La justicia restaurativa les brinda la oportunidad de obtener respuestas directamente del infractor.</li>
+                <li>Comprender el contexto que llevó al delito puede ayudar a disminuir el miedo y la ansiedad, especialmente en casos donde las víctimas desconocen los motivos del agresor.</li>
+            </ul>
+
+
+            <h2>Fortalecimiento del apoyo social</h2>
+            <ul>
+                <li>La justicia restaurativa suele involucrar a miembros de la comunidad o personas de confianza, lo que amplía la red de apoyo para las víctimas.</li>
+                <li>Este acompañamiento puede contribuir a que la víctima se sienta respaldada durante el proceso de recuperación.</li>
+            </ul>
+        </div>
+        <div id="servicios" class="elemento">
+            <h1>Servicios</h1>
+            <p>Ofrecemos una amplia gama de servicios para tu negocio.</p>
+        </div>
+        <div id="contacto" class="elemento">
+            <h1>Contacto</h1>
+            <p>Puedes contactarnos en contacto@ejemplo.com</p>
         </div>
     </div>
+
 {% else %}
 <!-- carousel -->
 <div class="carousel">

@@ -17,6 +17,9 @@
     <header>
         <div class="logo">
             <a href="#">Justicia Restaurativa <br>Cuba</a>
+            <img src="{% static 'img/justicia_logo.png' %}" alt="">
+            <img src="{% static 'img/ku_leuven.png' %}" alt="">
+            <img src="{% static 'img/escudo_marta_abreu.png' %}" alt="">
         </div>
 
         <!-- Menú principal -->
@@ -29,6 +32,7 @@
                 <ul>
                     <li><a href="{% url 'home' %}">Inicio</a></li>
                     <li><a href="{% url 'publicaciones' %}">Publicaciones</a></li>
+                    <li><a href="{% url 'biblioteca' %}">Biblioteca</a></li>
                     <li><a href="{% url 'redes_sociales' %}">Redes Sociales</a></li>
                     <li style="position: relative;">
                         <div class="notification_navbar"
@@ -95,5 +99,6 @@
     {% endif %}
 
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/menu_lateral.js' %}"></script>
 </body>
 </html>
